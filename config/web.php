@@ -14,10 +14,11 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        /*
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-        ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -42,14 +43,25 @@ $config = [
             'showScriptName' => false,
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@app/views/user'
+                ],
             ],
         ],
-        */
+    ],
+    'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableRegistration'=>true,
+            //'urlPrefix'=>'a',
+            'admins'=>['paulngumii']
+        ],
     ],
     'params' => $params,
 ];
