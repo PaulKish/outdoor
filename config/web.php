@@ -58,9 +58,13 @@ $config = [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-            'enableRegistration'=>true,
+            'enableRegistration'=>false,
+            'enableFlashMessages'=>true,
             //'urlPrefix'=>'a',
-            'admins'=>['paulngumii']
+            'admins'=>['paulngumii'],
+            'controllerMap' => [
+                'security' => 'app\controllers\user\SecurityController'
+            ],
         ],
     ],
     'params' => $params,
