@@ -5,29 +5,40 @@ use yii\bootstrap\Nav;
     $menuItems = [];
     
     $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-dashboard sub_icon"></i> Dashboard', 
+        'label' => '<i class="fa fa-lg fa-fw fa-home sub_icon"></i><span>Dashboard</span>', 
         'url' => ['/site/index']
     ];
 
     $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-music sub_icon"></i> Proof of Flight', 
+        'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
         'url' => ['/site/track-list']
     ];
 
     $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-book sub_icon"></i> Completitor Analysis', 
+        'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
         'url' => ['/album/index']
     ];
-    $menuItems[] = [
+    /*$menuItems[] = [
         'label' => '<i class="fa fa-lg fa-music sub_icon"></i> Reconciliation Log', 
         'url' => ['/works/index']
-    ];
+    ];*/
     $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-cog sub_icon"></i> '.Yii::t('user', 'Account Settings'), 
+        'label' => '<i class="fa fa-lg fa-fw fa-cog sub_icon"></i><span>'.Yii::t('user', 'Account Settings').'</span>', 
         'url' => ['/user/settings/account']
     ];
+    if(Yii::$app->user->identity->isAdmin){
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Manage Users</span>', 
+            'url' => ['/user/admin/index']
+        ]; 
+    }
     $menuItems[] = [
-        'label' => '<i id="fa-toggle" class="fa fa-lg fa-angle-double-left sub_icon"></i> Toggle',
+        'label' => '<i class="fa fa-lg fa-fw fa-sign-out sub_icon"></i><span>Logout</span>',
+        'url' => ['/user/security/logout'],
+        'linkOptions' => ['data-method' => 'post']
+    ];
+    $menuItems[] = [
+        'label' => '<i id="fa-toggle" class="fa fa-lg fa-fw fa-angle-double-left sub_icon"></i><span>Toggle</span>',
         'options'=>['id'=>'menu-toggle'], 
         'url' => '#'
     ];

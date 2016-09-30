@@ -38,7 +38,7 @@ AppAsset::register($this);
         <div class="page-content inset">
             <?php
             NavBar::begin([
-                'brandLabel' => 'ReelForge OutDoor',
+                'brandLabel' => Html::img('@web/img/reelforge_logo',['height'=>'60px']),
                 'brandUrl' => Yii::$app->homeUrl,
                 'innerContainerOptions' => ['class'=>'container-fluid'],
                 'options' => [
@@ -48,17 +48,8 @@ AppAsset::register($this);
             
             $menuItems = [];
 
-            if(Yii::$app->user->identity->isAdmin){
-                $menuItems[] = [
-                    'label' => '<i class="fa fa-users"></i> Manage Users', 
-                    'url' => ['/user/admin/index']
-                ]; 
-            }
-
             $menuItems[] = [
-                'label' => '<i class="fa fa-sign-out"></i> Logout ('.Yii::$app->user->identity->username.')',
-                'url' => ['/user/security/logout'],
-                'linkOptions' => ['data-method' => 'post']
+                'label' => 'OutDoor', 
             ];
 
             echo Nav::widget([
