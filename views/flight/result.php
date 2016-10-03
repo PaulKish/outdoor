@@ -1,6 +1,7 @@
 <?php
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 $this->title = 'Proof of Flight | Report';
@@ -21,19 +22,35 @@ $this->params['breadcrumbs'][] = $this->title;
 				    'columns' => [
 				        ['class' => 'yii\grid\SerialColumn'],
 				        'bbCompany.company_name',
-				        'date_time',
-				        'entry_time',
+				        'date_time:datetime',
+				        'entry_time:datetime',
 				        'rate',
 				        [
-				            'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+					        'format' => 'raw',
+					        'label' => 'Photo',
+					        'headerOptions' => ['class' => 'text-center'],
+					        'contentOptions' => ['class' => 'text-center'],
 				            'value' => function ($data) {
-				                return $data->photo;
+				                return Html::a('<i class="fa fa-lg fa-picture-o"></i>','#',
+				                	['class'=>'photo-modal','data'=>['photo'=>$data->photo]]
+				                );
 				            }
 				        ],
 				        [
-				            'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+				            'format' => 'raw',
+					        'label' => 'Location',
+					        'headerOptions' => ['class' => 'text-center'],
+					        'contentOptions' => ['class' => 'text-center'],
 				            'value' => function ($data) {
-				                return $data->lattitude.$data->longitude;
+				                return Html::a('<i class="fa fa-lg fa-map-marker"></i>','#',
+				                	[
+				                		'class'=>'location-modal',
+				                		'data'=>[
+				                			'latitude'=>$data->lattitude,
+				                			'longitude'=>$data->longitude
+				                		]
+				                	]
+				                );
 				            }
 				        ],
 				    ],

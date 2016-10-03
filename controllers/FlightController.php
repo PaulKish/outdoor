@@ -14,7 +14,7 @@ class FlightController extends \yii\web\Controller
         $model = new FlightFilterForm();
 
         // get brands for respective company
-        $brands = Brand::find()->where(['company_id'=>38])->limit(20)->all();
+        $brands = Brand::find()->where(['company_id'=>38])->all();
 
         if ($model->load(\Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -35,13 +35,8 @@ class FlightController extends \yii\web\Controller
         ]);
     }
 
-    public function actionMap()
-    {
-        return $this->render('map');
-    }
-
     public function actionPhoto()
     {
-        return $this->render('photo');
+        return $this->renderPartial('photo');
     }
 }

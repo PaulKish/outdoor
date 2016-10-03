@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Modal;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -76,6 +77,15 @@ AppAsset::register($this);
         </div>
     </div>
 </div>
+
+<?php 
+    Modal::begin([
+        'header' => '<h4>ReelForge OutDoor</h4>',
+        'options'=>['id'=>'siteModal']
+    ]);
+
+    Modal::end();
+?>
 
 <?php $this->endBody() ?>
 </body>
