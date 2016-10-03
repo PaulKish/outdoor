@@ -9,6 +9,7 @@ body {
     background-color: #fff;
     border-top: 1px solid #ddd;
     padding-top: 20px;
+    margin-top: 20px;
 }
 
 .jumbotron {
@@ -286,6 +287,32 @@ a.desc:after {
     background-color: transparent;
     color: #333;
 }
+.white-background{
+    background: #fff;
+}
+/* css for scroll box */
+.scrollbox {
+  height:200px;
+  overflow-y:scroll;
+  padding: 2px;
+  width: 100%;
+}
+#flightfilterform-brand .checkbox {
+    width: 32%;
+    padding: 2px;
+}
+/* Hr */
+hr{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-style: dashed none none;
+    border-color: #ccc;
+}
+
+h5{
+    font-weight: bold;
+}
+
 @media (max-width:767px) {
     #wrapper {
         padding-left: 70px;
