@@ -11,12 +11,12 @@ use yii\bootstrap\Nav;
 
     $menuItems[] = [
         'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
-        'url' => ['/site/track-list']
+        'url' => ['/flight/index']
     ];
 
     $menuItems[] = [
         'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
-        'url' => ['/album/index']
+        'url' => ['/competitor/index']
     ];
     $menuItems[] = [
         'label' => '<i class="fa fa-lg fa-fw fa-user sub_icon"></i><span>Account Settings</span>', 
