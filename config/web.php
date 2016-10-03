@@ -43,6 +43,7 @@ $config = [
             'showScriptName' => false,
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'db2' => require(__DIR__ . '/db2.php'),
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -60,8 +61,7 @@ $config = [
             'class' => 'dektrium\user\Module',
             'enableRegistration'=>false,
             'enableFlashMessages'=>true,
-            //'urlPrefix'=>'a',
-            'admins'=>['paulngumii'],
+            'admins'=>[''],
             'controllerMap' => [
                 'security' => 'app\controllers\user\SecurityController'
             ],

@@ -18,17 +18,13 @@ use yii\bootstrap\Nav;
         'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
         'url' => ['/album/index']
     ];
-    /*$menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-music sub_icon"></i> Reconciliation Log', 
-        'url' => ['/works/index']
-    ];*/
     $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-fw fa-cog sub_icon"></i><span>'.Yii::t('user', 'Account Settings').'</span>', 
+        'label' => '<i class="fa fa-lg fa-fw fa-user sub_icon"></i><span>Account Settings</span>', 
         'url' => ['/user/settings/account']
     ];
     if(Yii::$app->user->identity->isAdmin){
         $menuItems[] = [
-            'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Manage Users</span>', 
+            'label' => '<i class="fa fa-lg fa-fw fa-cog sub_icon"></i><span>Manage Users</span>', 
             'url' => ['/user/admin/index']
         ]; 
     }

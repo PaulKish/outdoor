@@ -1,0 +1,71 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "outdoor_logs".
+ *
+ * @property integer $id
+ * @property integer $admin_id
+ * @property integer $raw_id
+ * @property integer $bb_co_id
+ * @property integer $bb_site_id
+ * @property string $bb_size
+ * @property string $lattitude
+ * @property string $longitude
+ * @property string $date_time
+ * @property string $photo
+ * @property integer $brand_id
+ * @property integer $active
+ * @property string $rate
+ * @property string $entry_time
+ */
+class OutdoorLogs extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'outdoor_logs';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['admin_id', 'raw_id', 'bb_co_id', 'bb_site_id', 'brand_id', 'active'], 'integer'],
+            [['bb_size', 'photo'], 'string'],
+            [['date_time', 'entry_time'], 'safe'],
+            [['lattitude', 'longitude', 'rate'], 'string', 'max' => 200],
+            [['raw_id'], 'unique'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'admin_id' => 'Admin ID',
+            'raw_id' => 'Raw ID',
+            'bb_co_id' => 'Bb Co ID',
+            'bb_site_id' => 'Bb Site ID',
+            'bb_size' => 'Bb Size',
+            'lattitude' => 'Lattitude',
+            'longitude' => 'Longitude',
+            'date_time' => 'Date Time',
+            'photo' => 'Photo',
+            'brand_id' => 'Brand ID',
+            'active' => 'Active',
+            'rate' => 'Rate',
+            'entry_time' => 'Entry Time',
+        ];
+    }
+}
