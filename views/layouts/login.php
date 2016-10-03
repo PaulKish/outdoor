@@ -7,9 +7,9 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use app\assets\LoginAsset;
 
-AppAsset::register($this);
+LoginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -24,10 +24,10 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap login-wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Reelforge Outdoor',
+        'brandLabel' => Html::img('@web/img/reelforge_logo',['height'=>'60px']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -35,11 +35,6 @@ AppAsset::register($this);
     ]);
     
     $menuItems = [];
-
-    $menuItems[] = [
-        'label' => '<i class="fa fa-sign-in"></i> Sign In', 
-        'url' => ['/user/security/login']
-    ];
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

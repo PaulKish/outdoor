@@ -4,6 +4,9 @@ body {
     background-color: #F3F3F4;
     font-family: 'Open Sans', sans-serif;
 }
+.login-wrap{
+  margin-top:20px;
+}
 .footer {
     height: 60px;
     background-color: #fff;
