@@ -60,12 +60,28 @@ class OutdoorLogs extends \yii\db\ActiveRecord
             'bb_size' => 'Bb Size',
             'lattitude' => 'Lattitude',
             'longitude' => 'Longitude',
-            'date_time' => 'Date Time',
+            'date_time' => 'Date',
             'photo' => 'Photo',
             'brand_id' => 'Brand ID',
             'active' => 'Active',
             'rate' => 'Rate',
             'entry_time' => 'Entry Time',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBbCompany()
+    {
+        return $this->hasOne(BbCompanies::className(), ['co_id' => 'bb_co_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBbSite()
+    {
+        return $this->hasOne(BillboardSites::className(), ['id' => 'bb_site_id']);
     }
 }
