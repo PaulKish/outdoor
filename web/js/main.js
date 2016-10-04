@@ -21,7 +21,9 @@ $(document).ready(function() {
 		var longitude = $(this).data("longitude");
 		$('#siteModal').find('.modal-content').html('<div class="map-div" id="map"></div>');
 		$('#siteModal').modal('show',{cache:false});
-		initMap(latitude,longitude); // init google map
+		$('#siteModal').on('shown.bs.modal', function(e) {
+			initMap(latitude,longitude); // init google map
+		});
 	});
 
 	// google map init
