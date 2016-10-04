@@ -13,8 +13,11 @@ class FlightController extends \yii\web\Controller
     {
         $model = new FlightFilterForm();
 
+        // profile
+        $profile = \Yii::$app->user->identity->profile;
+
         // get brands for respective company
-        $brands = Brand::find()->where(['company_id'=>38])->all();
+        $brands = Brand::find()->where(['company_id'=>$profile->type_id])->all();
 
         if ($model->load(\Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -33,10 +36,5 @@ class FlightController extends \yii\web\Controller
             'model' => $model,
             'brands'=>$brands
         ]);
-    }
-
-    public function actionPhoto()
-    {
-        return $this->renderPartial('photo');
     }
 }

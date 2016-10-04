@@ -14,11 +14,6 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        /*
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -61,10 +56,12 @@ $config = [
             'class' => 'dektrium\user\Module',
             'enableRegistration'=>false,
             'enableFlashMessages'=>true,
-            'admins'=>[''],
             'controllerMap' => [
                 'security' => 'app\controllers\user\SecurityController'
             ],
+            'modelMap' => [
+                'User'=> 'app\models\user\User'
+            ]
         ],
     ],
     'params' => $params,
