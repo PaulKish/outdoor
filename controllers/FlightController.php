@@ -23,7 +23,7 @@ class FlightController extends \yii\web\Controller
             if ($model->validate()) {
 
                 $logs = OutdoorLogs::find()
-                    ->where(['brand_id'=>$model->brand])
+                    ->where(['in','brand_id',$model->brand])
                     ->andWhere(['between','date_time',$model->start_date,$model->end_date]);
 
                 return $this->render('result',[
