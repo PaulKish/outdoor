@@ -9,15 +9,27 @@ use yii\bootstrap\Nav;
         'url' => ['/site/index']
     ];
 
-    $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
-        'url' => ['/flight/index']
-    ];
+    // show advertiser menu
+    if(Yii::$app->user->identity->profile->user_type == 1){
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
+            'url' => ['/flight/index']
+        ];
 
-    $menuItems[] = [
-        'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
-        'url' => ['/competitor/index']
-    ];
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
+            'url' => ['/competitor/index']
+        ];
+    }
+
+    // show billboard owner menu
+    if(Yii::$app->user->identity->profile->user_type == 2){
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-list-alt sub_icon"></i><span>Reconciliation Log</span>', 
+            'url' => ['/reconciliation/index']
+        ];
+    }
+
     $menuItems[] = [
         'label' => '<i class="fa fa-lg fa-fw fa-user sub_icon"></i><span>Account Settings</span>', 
         'url' => ['/user/settings/account']

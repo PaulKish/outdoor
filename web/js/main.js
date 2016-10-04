@@ -12,7 +12,7 @@ $(document).ready(function() {
 	$(".photo-modal").on('click',function(e){
 		var photo = $(this).data("photo");
 		$('#siteModal').find('.modal-content').html('<div class="bb-photo"><img class="img-responsive" src="http://reelapp.reelforge.com/rf_outdoor/uploads/'+photo+'"></div>');
-		$('#siteModal').modal('show');
+		$('#siteModal').modal('show',{cache:false});
 	});
 
 	// shows modal containing a map
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		var latitude = $(this).data("latitude");
 		var longitude = $(this).data("longitude");
 		$('#siteModal').find('.modal-content').html('<div class="map-div" id="map"></div>');
-		$('#siteModal').modal('show');
+		$('#siteModal').modal('show',{cache:false});
 		initMap(latitude,longitude); // init google map
 	});
 

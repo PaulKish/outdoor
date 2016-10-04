@@ -292,6 +292,7 @@ a.desc:after {
 }
 .white-background{
     background: #fff;
+    padding: 20px;
 }
 /* css for scroll box */
 .scrollbox {

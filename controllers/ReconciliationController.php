@@ -2,26 +2,33 @@
 
 namespace app\controllers;
 
+use app\models\ReconciliationFilterForm;
+use app\models\OutdoorLogs;
+
 class ReconciliationController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        return $this->render('index');
-    }
+        $model = new ReconciliationFilterForm();
 
-    public function actionMap()
-    {
-        return $this->render('map');
-    }
+        // profile
+        $profile = \Yii::$app->user->identity->profile;
 
-    public function actionPhoto()
-    {
-        return $this->render('photo');
-    }
+        if ($model->load(\Yii::$app->request->post())) {
+            if ($model->validate()) {
 
-    public function actionResult()
-    {
-        return $this->render('result');
-    }
+                $logs = OutdoorLogs::find()
+                    ->where(['bb_co_id'=>$profile->type_id])
+                    ->andWhere(['between','date_time',$model->start_date,$model->end_date]);
 
+                return $this->render('result',[
+                    'logs'=>$logs
+                ]);
+            }
+        }
+
+        return $this->render('index', [
+            'model' => $model
+        ]);
+    }
 }
