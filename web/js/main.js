@@ -29,14 +29,14 @@ $(document).ready(function() {
 	    var myLatLng = {lat:lat,lng:long};
 
 	    var map = new google.maps.Map(document.getElementById('map'), {
-	      zoom: 13,
+	      zoom: 10,
 	      center: myLatLng
 	    });
 
 	    var marker = new google.maps.Marker({
 	      position: myLatLng,
 	      map: map,
-	      title: 'Map Marker'
+	      title: 'BillBoard Location'
 	    });
   	}
 });

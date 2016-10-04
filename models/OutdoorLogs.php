@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\forge\Brand;
 
 /**
  * This is the model class for table "outdoor_logs".
@@ -82,6 +83,14 @@ class OutdoorLogs extends \yii\db\ActiveRecord
      */
     public function getBbSite()
     {
-        return $this->hasOne(BillboardSites::className(), ['id' => 'bb_site_id']);
+        return $this->hasOne(BillboardSites::className(), ['bb_site_id' => 'bb_site_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBrand()
+    {
+        return $this->hasOne(Brand::className(), ['brand_id' => 'brand_id']);
     }
 }
