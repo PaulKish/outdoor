@@ -11,7 +11,7 @@ $(document).ready(function() {
 	// shows a modal containing a picture
 	$(".photo-modal").on('click',function(e){
 		var photo = $(this).data("photo");
-		$('#siteModal').find('.modal-content').html('<img src="'+photo+'">');
+		$('#siteModal').find('.modal-content').html('<div class="bb-photo"><img class="img-responsive" src="http://reelapp.reelforge.com/rf_outdoor/uploads/'+photo+'"></div>');
 		$('#siteModal').modal('show');
 	});
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
 	    var myLatLng = {lat:lat,lng:long};
 
 	    var map = new google.maps.Map(document.getElementById('map'), {
-	      zoom: 11,
+	      zoom: 13,
 	      center: myLatLng
 	    });
 

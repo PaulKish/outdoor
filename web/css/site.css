@@ -318,9 +318,15 @@ h5{
 
 /* Map div*/
 .map-div{
-  width: 100%;
+  width: 580px;
   height: 400px; 
   margin: 10px;  
+}
+
+
+.bb-photo img{
+  height: 400px;
+  margin: 10px auto;
 }
 
 @media (max-width:767px) {
