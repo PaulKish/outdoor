@@ -26,7 +26,7 @@ class ReconciliationController extends \yii\web\Controller
     public function actionResult(){
 
         $model = new ReconciliationFilterForm();
-
+        
         // profile
         $profile = \Yii::$app->user->identity->profile;
 
@@ -45,7 +45,7 @@ class ReconciliationController extends \yii\web\Controller
                 $dataProvider = new ActiveDataProvider([
                     'query' => $logs,
                     'pagination' => [
-                        'pageSize' => 5,
+                        'pageSize' => 10,
                     ],
                 ]);
 
@@ -62,7 +62,7 @@ class ReconciliationController extends \yii\web\Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => $logs,
                 'pagination' => [
-                    'pageSize' => 5,
+                    'pageSize' => 10,
                 ],
             ]);
 
