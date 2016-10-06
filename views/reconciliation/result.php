@@ -19,12 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				]);
 				echo GridView::widget([
 				    'dataProvider' => $dataProvider,
+				    'layout'=>"{items}\n{summary}\n{pager}",
 				    'columns' => [
 				        ['class' => 'yii\grid\SerialColumn'],
-				        'bbCompany.company_name',
+				        'brand.company.company_name',
+				        'brand.brand_name',
+				        'bb_size',
 				        'date_time:datetime',
-				        'entry_time:datetime',
 				        'rate',
+				        'rawLog.comment',
 				        [
 					        'format' => 'raw',
 					        'label' => 'Photo',
