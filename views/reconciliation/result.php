@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				$dataProvider = new ActiveDataProvider([
 				    'query' => $logs,
 				    'pagination' => [
-				        'pageSize' => 20,
+				        'pageSize' => 10,
 				    ],
 				]);
 				echo GridView::widget([
