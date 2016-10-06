@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\models\forge\ForgeUsers;
 /**
  * This is the model class for table "user_assignment".
  *
@@ -54,5 +54,17 @@ class UserAssignment extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompany()
+    {
+        if($this->user_type == 1){ // type 1 is advertisers
+            return $this->hasOne(ForgeUsers::className(), ['company_id' => 'type_id']);
+        }else{ // must be a billboard owner
+            return $this->hasOne(BbCompanies::className(), ['co_id' => 'type_id']);
+        } 
     }
 }
