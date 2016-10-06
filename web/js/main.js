@@ -1,12 +1,25 @@
 // Document ready
 $(document).ready(function() {
-	// ?
-	$("#menu-toggle").click(function(e) {
-	    e.preventDefault();
-	    $("#wrapper").toggleClass("active");
+
+	// menu visibility
+	function menu_toggle(){
+		$("#wrapper").toggleClass("active");
 	    // change toggle class
 	    $("#fa-toggle").toggleClass("fa-angle-double-right fa-angle-double-left");
+	}
+
+	// toggle the side bar
+	$("#menu-toggle").click(function(e) {
+	    e.preventDefault();
+	    menu_toggle();
 	});
+
+	// if screen is small hide menu else show untoggled
+	var screen_width = $(window).width();
+	if(screen_width <= 768){
+		menu_toggle();
+	}
+
 
 	// shows a modal containing a picture
 	$(".photo-modal").on('click',function(e){

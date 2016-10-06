@@ -121,9 +121,9 @@ a.desc:after {
 }
 
 #sidebar-wrapper {
-    margin-left: -250px;
+    margin-left: -240px;
     left: 70px;
-    width: 250px;
+    width: 240px;
     background: #2F4050;
     position: fixed;
     height: 100%;
@@ -147,10 +147,10 @@ a.desc:after {
     height: auto;
 }
 #wrapper.active {
-    padding-left: 250px;
+    padding-left: 240px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 250px;
+    left: 240px;
 }
 
 #page-content-wrapper {
