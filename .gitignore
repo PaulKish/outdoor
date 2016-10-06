@@ -25,3 +25,10 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+# don't include some scripts
+index.php
+index-test.php
+config/db.php
+config/db2.php
+config/params.php
