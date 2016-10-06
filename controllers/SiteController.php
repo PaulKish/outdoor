@@ -49,4 +49,30 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
+    /**
+     *  Shows a map
+     */ 
+    public function actionMap(){
+        $this->layout = '@app/views/layouts/login';
+        $lat = \Yii::$app->request->get('lat');
+        $long = \Yii::$app->request->get('long');
+        return $this->render('map',[
+            'lat'=>$lat,
+            'long'=>$long
+        ]);
+    }
+
+    /**
+     *  Shows photo
+     */
+    public function actionPhoto(){
+        $this->layout = '@app/views/layouts/login';
+
+        $photo = \Yii::$app->request->get('photo');
+        
+        return $this->render('photo',[
+            'photo'=>$photo,
+        ]);
+    }
 }

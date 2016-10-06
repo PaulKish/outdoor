@@ -64,6 +64,7 @@ $config = [
                 'User'=> 'app\models\user\User'
             ]
         ],
+        'gridview' => ['class' => 'kartik\grid\Module']
     ],
     'params' => $params,
 ];

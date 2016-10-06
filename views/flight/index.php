@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="flight-index container-fluid">
 	<div class="row">
 		<div class="col-md-12 white-background">
-		    <?php $form = ActiveForm::begin(['layout'=>'inline']); ?>
+		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
 		    	<h5>Brand <small><a href="#" onClick="toggle_checkboxes(1,'FlightFilterForm[brand][]')">Check all brands</a> | <a href="#" onClick="toggle_checkboxes(0,'FlightFilterForm[brand][]')">Uncheck all brands</a></small></h5>
 		    	<hr>

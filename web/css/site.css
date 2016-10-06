@@ -5,7 +5,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 .login-wrap{
-  margin-top:20px;
+  margin-top:60px;
 }
 .footer {
     height: 60px;
@@ -324,9 +324,20 @@ h5{
   margin: 10px;  
 }
 
+/* Map div big*/
+.map-div-big{
+  width: 100%;
+  height: 500px; 
+  margin: 10px auto;  
+}
+
 
 .bb-photo img{
   height: 400px;
+  margin: 10px auto;
+}
+
+.img-center{
   margin: 10px auto;
 }
 

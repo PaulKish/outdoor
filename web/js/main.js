@@ -38,23 +38,23 @@ $(document).ready(function() {
 			initMap(latitude,longitude); // init google map
 		});
 	});
-
-	// google map init
-	function initMap(lat,long) {
-	    var myLatLng = {lat:lat,lng:long};
-
-	    var map = new google.maps.Map(document.getElementById('map'), {
-	      zoom: 10,
-	      center: myLatLng
-	    });
-
-	    var marker = new google.maps.Marker({
-	      position: myLatLng,
-	      map: map,
-	      title: 'BillBoard Location'
-	    });
-  	}
 });
+
+// google map init
+function initMap(lat,long) {
+    var myLatLng = {lat:lat,lng:long};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: myLatLng
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'BillBoard Location'
+    });
+}
 
 // toggle checkbokes, used in brand selection
 function toggle_checkboxes(source,name) {
