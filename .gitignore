@@ -27,8 +27,8 @@ phpunit.phar
 /phpunit.xml
 
 # don't include some scripts
-index.php
-index-test.php
+web/index.php
+web/index-test.php
 config/db.php
 config/db2.php
 config/params.php
