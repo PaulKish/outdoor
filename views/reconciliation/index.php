@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="reconciliation-index container-fluid">
 	<div class="row">
 		<div class="col-md-12 white-background">
-		    <?php $form = ActiveForm::begin(['layout'=>'inline']); ?>
+		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
 		        <h5>Date</h5>
 		        <hr>

@@ -45,8 +45,8 @@ class FlightController extends \yii\web\Controller
                 $session['brand'] = $model->brand;
 
                 $logs = OutdoorLogs::find()
-                    ->where(['in','brand_id',$model->brand])
-                    ->andWhere(['between','date_time',$model->start_date,$model->end_date]);
+                    ->where(['in','brand_id',$session['brand']])
+                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date'] ]);
 
                 $dataProvider = new ActiveDataProvider([
                     'query' => $logs,
