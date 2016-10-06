@@ -50,7 +50,7 @@ class SubIndustry extends \yii\db\ActiveRecord
         return [
             'auto_id' => 'Auto ID',
             'industry_id' => 'Industry ID',
-            'sub_industry_name' => 'Sub Industry Name',
+            'sub_industry_name' => 'Sub Industry',
         ];
     }
 }

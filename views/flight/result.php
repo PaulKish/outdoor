@@ -14,17 +14,21 @@ $this->params['breadcrumbs'][] = $this->title;
 				$dataProvider = new ActiveDataProvider([
 				    'query' => $logs,
 				    'pagination' => [
-				        'pageSize' => 20,
+				        'pageSize' => 10,
 				    ],
 				]);
 				echo GridView::widget([
 				    'dataProvider' => $dataProvider,
+				    'layout'=>"{items}\n{summary}\n{pager}",
 				    'columns' => [
 				        ['class' => 'yii\grid\SerialColumn'],
+				        'brand.company.company_name',
+				        'brand.brand_name',
 				        'bbCompany.company_name',
+				        'bb_size',
 				        'date_time:datetime',
-				        'entry_time:datetime',
 				        'rate',
+				        'rawLog.comment',
 				        [
 					        'format' => 'raw',
 					        'label' => 'Photo',

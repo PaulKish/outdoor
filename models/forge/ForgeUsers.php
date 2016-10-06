@@ -73,7 +73,7 @@ class ForgeUsers extends \yii\db\ActiveRecord
     {
         return [
             'company_id' => 'Company ID',
-            'company_name' => 'Company Name',
+            'company_name' => 'Company',
             'company_rep_name' => 'Company Rep Name',
             'username' => 'Username',
             'email' => 'Email',

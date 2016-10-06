@@ -58,8 +58,8 @@ class OutdoorLogs extends \yii\db\ActiveRecord
             'raw_id' => 'Raw ID',
             'bb_co_id' => 'Bb Co ID',
             'bb_site_id' => 'Bb Site ID',
-            'bb_size' => 'Bb Size',
-            'lattitude' => 'Lattitude',
+            'bb_size' => 'Size',
+            'lattitude' => 'Latitude',
             'longitude' => 'Longitude',
             'date_time' => 'Date',
             'photo' => 'Photo',
@@ -68,6 +68,14 @@ class OutdoorLogs extends \yii\db\ActiveRecord
             'rate' => 'Rate',
             'entry_time' => 'Entry Time',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRawLog()
+    {
+        return $this->hasOne(RawLogs::className(), ['raw_id' => 'raw_id']);
     }
 
     /**

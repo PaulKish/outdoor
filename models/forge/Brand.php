@@ -61,7 +61,7 @@ class Brand extends \yii\db\ActiveRecord
         return [
             'brand_id' => 'Brand ID',
             'agency_id' => 'Agency ID',
-            'brand_name' => 'Brand Name',
+            'brand_name' => 'Brand',
             'brand_description' => 'Brand Description',
             'industry_id' => 'Industry ID',
             'sub_industry_id' => 'Sub Industry ID',
@@ -71,5 +71,21 @@ class Brand extends \yii\db\ActiveRecord
             'entry_date' => 'Entry Date',
             'segment' => 'Segment',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompany()
+    {
+        return $this->hasOne(ForgeUsers::className(), ['company_id' => 'company_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubIndustry()
+    {
+        return $this->hasOne(SubIndustry::className(), ['auto_id' => 'sub_industry_id']);
     }
 }

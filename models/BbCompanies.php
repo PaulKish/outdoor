@@ -42,7 +42,7 @@ class BbCompanies extends \yii\db\ActiveRecord
     {
         return [
             'co_id' => 'Co ID',
-            'company_name' => 'Company',
+            'company_name' => 'Billboard Company',
             'desc' => 'Desc',
             'created' => 'Created',
         ];
