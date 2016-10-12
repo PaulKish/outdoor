@@ -10,6 +10,7 @@ use app\models\forge\SubIndustry;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 
+
 class CompetitorController extends \yii\web\Controller
 {
     public function actionIndex()

@@ -2,7 +2,7 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use kartik\export\ExportMenu;
+use app\common\ExportMenu;
 
 /* @var $this yii\web\View */
 $this->title = 'Competitor Analysis | Report';
@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="competitor-result container-fluid">
 	<div class="row">
 		<div class="col-md-12 white-background">
-
 			<?php 
 				$gridColumns = [
 				    ['class' => 'yii\grid\SerialColumn'],
@@ -31,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			            }
 			        ],
 			        [
-				            'format' => 'raw',
-					        'label' => 'Location',
-					        'headerOptions' => ['class' => 'text-center'],
-					        'contentOptions' => ['class' => 'text-center'],
-				            'value' => function ($data) {
-				                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
-				            }
-				        ],
+			            'format' => 'raw',
+				        'label' => 'Location',
+				        'headerOptions' => ['class' => 'text-center'],
+				        'contentOptions' => ['class' => 'text-center'],
+			            'value' => function ($data) {
+			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
+			            }
+			        ],
 				];
 
 				// Renders a export dropdown menu

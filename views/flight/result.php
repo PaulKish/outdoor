@@ -2,7 +2,7 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use kartik\export\ExportMenu;
+use app\common\ExportMenu;
 
 /* @var $this yii\web\View */
 $this->title = 'Proof of Flight | Report';
@@ -24,21 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',
-				        'headerOptions' => ['class' => 'text-center'],
-				        'contentOptions' => ['class' => 'text-center'],
 			            'value' => function ($data) {
 			                return Url::to(['site/photo','photo'=>$data->photo],true);
 			            }
 			        ],
 			        [
-				            'format' => 'raw',
-					        'label' => 'Location',
-					        'headerOptions' => ['class' => 'text-center'],
-					        'contentOptions' => ['class' => 'text-center'],
-				            'value' => function ($data) {
-				                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
-				            }
-				        ],
+			            'format' => 'raw',
+				        'label' => 'Location',
+			            'value' => function ($data) {
+			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
+			            }
+			        ],
 				];
 
 				// Renders a export dropdown menu
