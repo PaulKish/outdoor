@@ -13,6 +13,7 @@ use yii\data\ActiveDataProvider;
 
 class CompetitorController extends \yii\web\Controller
 {
+    /*
     public function actionIndex()
     {
     	$model = new CompetitorFilterForm();
@@ -32,7 +33,7 @@ class CompetitorController extends \yii\web\Controller
 
     /**
      *  Show grid of results
-     */ 
+     *
     public function actionResult(){
         $model = new CompetitorFilterForm();
 
@@ -107,5 +108,5 @@ class CompetitorController extends \yii\web\Controller
         }else{
             return $this->redirect('index');
         }
-    }
+    }*/
 }

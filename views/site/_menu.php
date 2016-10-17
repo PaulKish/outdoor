@@ -16,10 +16,11 @@ use yii\bootstrap\Nav;
             'url' => ['/flight/index']
         ];
 
+        /*
         $menuItems[] = [
             'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
             'url' => ['/competitor/index']
-        ];
+        ];*/
     }
 
     // show billboard owner menu
