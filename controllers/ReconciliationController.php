@@ -40,7 +40,8 @@ class ReconciliationController extends \yii\web\Controller
 
                 $logs = OutdoorLogs::find()
                     ->where(['bb_co_id'=>$profile->type_id])
-                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']]);
+                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->orderBy('date_time asc');
 
                 $dataProvider = new ActiveDataProvider([
                     'query' => $logs,
@@ -57,7 +58,8 @@ class ReconciliationController extends \yii\web\Controller
 
             $logs = OutdoorLogs::find()
                     ->where(['bb_co_id'=>$profile->type_id])
-                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']]);
+                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->orderBy('date_time asc');
 
             $dataProvider = new ActiveDataProvider([
                 'query' => $logs,
