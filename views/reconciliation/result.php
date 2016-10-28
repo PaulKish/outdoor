@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'bb_size',
 			        'date_time:datetime',
 			        'rate',
-			        'rawLog.comment',
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',

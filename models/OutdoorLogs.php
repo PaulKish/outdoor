@@ -91,7 +91,7 @@ class OutdoorLogs extends \yii\db\ActiveRecord
      */
     public function getBbSite()
     {
-        return $this->hasOne(BillboardSites::className(), ['bb_site_id' => 'bb_site_id']);
+        return $this->hasOne(BillboardSites::className(), ['id' => 'bb_site_id']);
     }
 
     /**

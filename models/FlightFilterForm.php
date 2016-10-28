@@ -14,6 +14,9 @@ class FlightFilterForm extends Model
     public $brand;
     public $start_date;
     public $end_date;
+    public $type;
+    public $condition;
+    public $region;
 
     /**
      * @return array the validation rules.
@@ -21,7 +24,7 @@ class FlightFilterForm extends Model
     public function rules()
     {
         return [
-            [['brand', 'start_date', 'end_date'], 'required'],
+            [['brand', 'start_date', 'end_date','condition','type','region'], 'required'],
         ];
     }
 }

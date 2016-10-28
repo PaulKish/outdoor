@@ -4,6 +4,10 @@ namespace app\controllers;
 
 use app\models\ReconciliationFilterForm;
 use app\models\OutdoorLogs;
+use app\models\BillboardType;
+use app\models\BillboardSites;
+use app\models\BillboardCondition;
+use app\models\Counties;
 use yii\data\ActiveDataProvider;
 
 class ReconciliationController extends \yii\web\Controller
@@ -14,9 +18,15 @@ class ReconciliationController extends \yii\web\Controller
     public function actionIndex()
     {
         $model = new ReconciliationFilterForm();
+        $types = BillboardType::find()->all();
+        $conditions = BillboardCondition::find()->all();
+        $regions = Counties::find()->all();
 
         return $this->render('index', [
-            'model' => $model
+            'model' => $model,
+            'types' => $types,
+            'conditions' => $conditions,
+            'regions' => $regions
         ]);
     }
 
@@ -37,10 +47,19 @@ class ReconciliationController extends \yii\web\Controller
                 // store model params in session
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
+                $session['condition'] = $model->condition;
+                $session['type'] = $model->type;
+                $session['region'] = $model->region;
 
                 $logs = OutdoorLogs::find()
-                    ->where(['bb_co_id'=>$profile->type_id])
-                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->joinWith(['bbSite','rawLog'])
+                    ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
+                    ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
+                    ->andWhere([
+                        'type'=>$session['type'],
+                        'condition'=> $session['condition'],
+                        'region'=>$session['region']
+                    ])
                     ->orderBy('date_time asc');
 
                 $dataProvider = new ActiveDataProvider([
@@ -57,9 +76,15 @@ class ReconciliationController extends \yii\web\Controller
         }elseif($session['start_date']){
 
             $logs = OutdoorLogs::find()
-                    ->where(['bb_co_id'=>$profile->type_id])
-                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date']])
-                    ->orderBy('date_time asc');
+                ->joinWith(['bbSite','rawLog'])
+                ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
+                ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
+                ->andWhere([
+                    'type'=>$session['type'],
+                    'condition'=> $session['condition'],
+                    'region'=>$session['region']
+                ])
+                ->orderBy('date_time asc');
 
             $dataProvider = new ActiveDataProvider([
                 'query' => $logs,

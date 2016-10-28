@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use app\models\FlightFilterForm;
+use app\models\BillboardType;
+use app\models\BillboardSites;
+use app\models\BillboardCondition;
+use app\models\Counties;
 use app\models\OutdoorLogs;
 use app\models\forge\Brand;
 use yii\data\ActiveDataProvider;
@@ -22,9 +26,16 @@ class FlightController extends \yii\web\Controller
         // get brands for respective company
         $brands = Brand::find()->where(['company_id'=>$profile->type_id])->all();
 
+        $types = BillboardType::find()->all();
+        $conditions = BillboardCondition::find()->all();
+        $regions = Counties::find()->all();
+
         return $this->render('index', [
             'model' => $model,
-            'brands'=>$brands
+            'brands'=> $brands,
+            'types' => $types,
+            'conditions' => $conditions,
+            'regions' => $regions
         ]);
     }
 
@@ -43,10 +54,22 @@ class FlightController extends \yii\web\Controller
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
                 $session['brand'] = $model->brand;
+                $session['condition'] = $model->condition;
+                $session['type'] = $model->type;
+                $session['region'] = $model->region;
 
                 $logs = OutdoorLogs::find()
+                    ->joinWith(['bbSite','rawLog'])
                     ->where(['in','brand_id',$session['brand']])
-                    ->andWhere(['between','date_time',$session['start_date'],$session['end_date'] ])
+                    ->andWhere(
+                        ['between',
+                            'outdoor_logs.date_time',$session['start_date'],$session['end_date'] 
+                        ])
+                    ->andWhere([
+                        'type'=>$session['type'],
+                        'condition'=> $session['condition'],
+                        'region'=>$session['region']
+                    ])
                     ->orderBy('date_time asc');
 
                 $dataProvider = new ActiveDataProvider([
@@ -62,9 +85,18 @@ class FlightController extends \yii\web\Controller
             }
         }elseif($session['start_date']){
 
-            $logs = OutdoorLogs::find()
+             $logs = OutdoorLogs::find()
+                ->joinWith(['bbSite','rawLog'])
                 ->where(['in','brand_id',$session['brand']])
-                ->andWhere(['between','date_time',$session['start_date'],$session['end_date'] ])
+                ->andWhere(
+                    ['between',
+                        'outdoor_logs.date_time',$session['start_date'],$session['end_date'] 
+                    ])
+                ->andWhere([
+                    'type'=>$session['type'],
+                    'condition'=> $session['condition'],
+                    'region'=>$session['region']
+                ])
                 ->orderBy('date_time asc');
 
             $dataProvider = new ActiveDataProvider([

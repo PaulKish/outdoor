@@ -16,6 +16,7 @@ use Yii;
  * @property string $campaign
  * @property string $photo
  * @property string $entry_time
+ * @property integer $condition
  * @property string $comment
  * @property integer $status
  */
@@ -35,9 +36,10 @@ class RawLogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bb_co_id', 'status'], 'integer'],
+            [['bb_co_id', 'condition', 'status'], 'integer'],
             [['campaign', 'comment'], 'string'],
             [['entry_time'], 'safe'],
+            [['condition'], 'required'],
             [['agent_id', 'lattitude', 'longitude', 'date_time', 'photo'], 'string', 'max' => 200],
             [['photo'], 'unique'],
         ];
@@ -58,7 +60,8 @@ class RawLogs extends \yii\db\ActiveRecord
             'campaign' => 'Campaign',
             'photo' => 'Photo',
             'entry_time' => 'Entry Time',
-            'comment' => 'Billboard state',
+            'condition' => 'Condition',
+            'comment' => 'Comment',
             'status' => 'Status',
         ];
     }

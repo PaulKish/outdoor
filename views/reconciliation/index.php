@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use dosamigos\datepicker\DateRangePicker;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ReconciliationFilterForm */
@@ -15,6 +16,36 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<div class="col-md-12 white-background">
 		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
+
+		    	<div class="row">
+		        	<div class="col-sm-3">
+		        		<h5>Region</h5>
+				        <hr>
+				        <?= $form->field($model, 'region')->dropDownList(
+				        		ArrayHelper::map($regions, 'id', 'name'),
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        	<div class="col-sm-3">
+		        		<h5>Billboard Condition</h5>
+				        <hr>
+				        <?= $form->field($model, 'condition')->dropDownList(
+				        		ArrayHelper::map($conditions, 'id', 'condition'), 
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        	<div class="col-sm-6">
+		        		<h5>Billboard Type</h5>
+				        <hr>
+				        <?= $form->field($model, 'type')->dropDownList(
+				        		ArrayHelper::map($types, 'id', 'type'),
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        </div>
 
 		        <h5>Date</h5>
 		        <hr>

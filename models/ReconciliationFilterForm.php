@@ -13,6 +13,9 @@ class ReconciliationFilterForm extends Model
 {
     public $start_date;
     public $end_date;
+    public $type;
+    public $condition;
+    public $region;
 
     /**
      * @return array the validation rules.
@@ -20,7 +23,7 @@ class ReconciliationFilterForm extends Model
     public function rules()
     {
         return [
-            [['start_date', 'end_date'], 'required'],
+            [['start_date', 'end_date','condition','type','region'], 'required'],
         ];
     }
 }

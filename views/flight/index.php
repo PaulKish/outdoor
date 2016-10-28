@@ -28,6 +28,36 @@ $this->params['breadcrumbs'][] = $this->title;
 		        
 		        <hr>
 
+		        <div class="row">
+		        	<div class="col-sm-3">
+		        		<h5>Region</h5>
+				        <hr>
+				        <?= $form->field($model, 'region')->dropDownList(
+				        		ArrayHelper::map($regions, 'id', 'name'),
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        	<div class="col-sm-3">
+		        		<h5>Billboard Condition</h5>
+				        <hr>
+				        <?= $form->field($model, 'condition')->dropDownList(
+				        		ArrayHelper::map($conditions, 'id', 'condition'), 
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        	<div class="col-sm-6">
+		        		<h5>Billboard Type</h5>
+				        <hr>
+				        <?= $form->field($model, 'type')->dropDownList(
+				        		ArrayHelper::map($types, 'id', 'type'),
+				        		['prompt'=>'--Please Select--']
+				        	) 
+				        ?>
+		        	</div>
+		        </div>
+
 		        <h5>Date</h5>
 		        <hr>
 		        <?= $form->field($model, 'start_date')->widget(

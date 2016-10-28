@@ -327,7 +327,11 @@ h5{
 /* Map div big*/
 .map-div-big{
   width: 100%;
-  height: 500px; 
+  height: 400px; 
+  margin: 10px auto;  
+}
+
+#gmap0-map-canvas{
   margin: 10px auto;  
 }
 

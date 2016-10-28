@@ -50,6 +50,16 @@ $config = [
                 ],
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => 'AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs',
+                        'language' => 'end'
+                    ]
+                ]
+            ]
+        ],
     ],
     'modules' => [
         'user' => [

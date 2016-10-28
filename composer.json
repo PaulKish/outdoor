@@ -21,10 +21,10 @@
         "dektrium/yii2-user": "0.9.*@dev",
         "2amigos/yii2-date-picker-widget": "^1.0",
         "kartik-v/yii2-export": "@dev",
-        "mpdf/mpdf": "^6.1"
+        "mpdf/mpdf": "^6.1",
+        "2amigos/yii2-google-maps-library": "*"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
