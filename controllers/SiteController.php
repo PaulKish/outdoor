@@ -73,20 +73,24 @@ class SiteController extends Controller
                     ->where(['company_id'=>$profile->type_id]) 
                     ->all(); 
             }])
-            ->where('date_time >= now() - interval 1 month')
+            //->where('date_time >= now() - interval 1 month')
+            ->limit(20)
+            ->distinct()
             ->all();
         }else{ // show billboards for company
             $logs = OutdoorLogs::find()
-            ->where('date_time >= now() - interval 1 month')
-            ->andWhere(['bb_co_id'=>$profile->type_id])
+            //->where('date_time >= now() - interval 1 month')
+            ->where(['bb_co_id'=>$profile->type_id])
+            ->distinct()
+            ->limit(20)
             ->all();
         }
             
 
         foreach($logs as $log){
             // Lets add a marker now
-            $title = isset($log->brand->brand_name) ? $log->brand->brand_name:'None';
-            $title .= ' | '.$log->bbCompany->company_name; 
+            $title = isset($log->brand->brand_name) ? $log->brand->brand_name: 'None';
+            $title .= ' | Billboard Company'; 
 
             $marker = new Marker([
                 'position' => new LatLng(['lat' => $log->lattitude, 'lng' => $log->longitude]),
