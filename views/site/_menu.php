@@ -15,12 +15,19 @@ use yii\bootstrap\Nav;
             'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
             'url' => ['/flight/index']
         ];
-
-        /*
         $menuItems[] = [
-            'label' => '<i class="fa fa-lg fa-fw fa-users sub_icon"></i><span>Competitor Analysis</span>', 
-            'url' => ['/competitor/index']
-        ];*/
+            'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spends</span>', 
+            'items'=>[
+                [
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Company</span>', 
+                    'url' => ['/spends/index']
+                ],
+                [
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Brand</span>', 
+                    'url' => ['/spends/brand']
+                ]
+            ]
+        ];
     }
 
     // show billboard owner menu

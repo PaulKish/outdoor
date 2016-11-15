@@ -25,6 +25,7 @@ use app\models\forge\Brand;
  */
 class OutdoorLogs extends \yii\db\ActiveRecord
 {
+    public $total; // for sum totals
     /**
      * @inheritdoc
      */
@@ -67,6 +68,7 @@ class OutdoorLogs extends \yii\db\ActiveRecord
             'active' => 'Active',
             'rate' => 'Rate',
             'entry_time' => 'Entry Time',
+            'total'=>'Total (KES)'
         ];
     }
 
