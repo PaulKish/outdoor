@@ -14,6 +14,8 @@ use dosamigos\google\maps\Map;
 
 class SiteController extends Controller
 {
+    public $layout = '@app/views/layouts/login';
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     { 
+        $this->layout = '@app/views/layouts/main';
         $center = new LatLng(['lat' =>-1.28333, 'lng' => 36.81667]);
         $map = new Map([
             'center' => $center,
@@ -109,7 +112,6 @@ class SiteController extends Controller
      *  Shows a map
      */ 
     public function actionMap(){
-        $this->layout = '@app/views/layouts/login';
         $lat = \Yii::$app->request->get('lat');
         $long = \Yii::$app->request->get('long');
         return $this->render('map',[
@@ -122,10 +124,7 @@ class SiteController extends Controller
      *  Shows photo
      */
     public function actionPhoto(){
-        $this->layout = '@app/views/layouts/login';
-
         $photo = \Yii::$app->request->get('photo');
-        
         return $this->render('photo',[
             'photo'=>$photo,
         ]);

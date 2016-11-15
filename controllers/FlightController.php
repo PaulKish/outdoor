@@ -10,9 +10,28 @@ use app\models\Counties;
 use app\models\OutdoorLogs;
 use app\models\forge\Brand;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 
 class FlightController extends \yii\web\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
+
     /**
      *  Index page, shows filter form
      */

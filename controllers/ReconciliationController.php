@@ -9,9 +9,28 @@ use app\models\BillboardSites;
 use app\models\BillboardCondition;
 use app\models\Counties;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 
 class ReconciliationController extends \yii\web\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
+
     /**
      * Shows filter form 
      */

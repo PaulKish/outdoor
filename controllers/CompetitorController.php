@@ -9,10 +9,27 @@ use app\models\forge\Brand;
 use app\models\forge\SubIndustry;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
-
+use yii\filters\AccessControl;
 
 class CompetitorController extends \yii\web\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
     /*
     public function actionIndex()
     {
