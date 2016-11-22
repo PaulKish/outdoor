@@ -6,7 +6,7 @@ use app\common\ExportMenu;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-$this->title = 'Total Spends | Report by Company';
+$this->title = 'Total Spends | Report by Industry';
 $this->params['breadcrumbs'][] = $this->title;
 $session = \Yii::$app->session;
 ?>
@@ -18,6 +18,7 @@ $session = \Yii::$app->session;
 				$gridColumns = [
 				    ['class' => 'yii\grid\SerialColumn'],
 				    'brand.company.company_name',
+				    'brand.subIndustry.industry.industry_name',
 			        'total'
 				];
 
@@ -41,9 +42,9 @@ $session = \Yii::$app->session;
 				    ]
 				]);
 
-				echo '<hr>'; 
+				echo '<hr>'; 	
 
-				$data = ArrayHelper::map($dataProvider->getModels(), 'brand.company.company_name','total');
+				$data = ArrayHelper::map($chart_logs,'brand.subIndustry.industry.industry_name','total');
 				$chart = [];
 				foreach($data as $key => $value){
 					$chart[] = ['name'=>$key,'y'=>(int)$value];
@@ -55,7 +56,7 @@ $session = \Yii::$app->session;
 				                'type' => 'pie'
 				        ],
 				        'title' => [
-			             	'text' => 'Total Spends by Company'
+			             	'text' => 'Total Spends by Industry'
 			            ],
 			            'tooltip'=> [
 				            'pointFormat' => '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -74,14 +75,14 @@ $session = \Yii::$app->session;
 				            ]
 				        ],
 			            'series' => [[
-				            'name' => 'Companies',
+				            'name' => 'Brands',
 				            'colorByPoint' => true,
 				            'data' => $chart
 				        ]] 
 				    ]
 				]);
 
-				echo '<hr>'; 	
+				echo '<hr>'; 
 
 				echo GridView::widget([
 				    'dataProvider' => $dataProvider,
@@ -89,6 +90,7 @@ $session = \Yii::$app->session;
 				    'columns' => [
 				        ['class' => 'yii\grid\SerialColumn'],
 				        'brand.company.company_name',
+				        'brand.subIndustry.industry.industry_name',
 				        [
 						    'attribute' => 'total',
 						    'contentOptions' => ['class' => 'text-right'],

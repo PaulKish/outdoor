@@ -53,4 +53,12 @@ class SubIndustry extends \yii\db\ActiveRecord
             'sub_industry_name' => 'Sub Industry',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndustry()
+    {
+        return $this->hasOne(Industry::className(), ['industry_id' => 'industry_id']);
+    }
 }

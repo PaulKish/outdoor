@@ -25,6 +25,10 @@ use yii\bootstrap\Nav;
                 [
                     'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Brand</span>', 
                     'url' => ['/spends/brand']
+                ],
+                [
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Industry</span>', 
+                    'url' => ['/spends/industry']
                 ]
             ]
         ];

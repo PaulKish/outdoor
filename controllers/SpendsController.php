@@ -233,4 +233,135 @@ class SpendsController extends \yii\web\Controller
             return $this->redirect('index');
         }
     }
+
+    /**
+     *  By Brand
+     */
+    public function actionIndustry()
+    {
+        $model = new CompetitorFilterForm();
+
+        return $this->render('industry', [
+            'model' => $model
+        ]);
+    }
+
+    /**
+     *  Show grid of results
+     */
+    public function actionResultIndustry(){
+        $model = new CompetitorFilterForm();
+
+        $session = \Yii::$app->session;
+
+        $profile = \Yii::$app->user->identity->profile;
+
+        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+
+        $model->industry = ArrayHelper::getColumn($industry, 'industry_id');
+
+        if ($model->load(\Yii::$app->request->post())) {
+            if ($model->validate()) {
+
+                // store model params in session
+                $session['start_date'] = $model->start_date;
+                $session['end_date'] = $model->end_date;
+                $session['industry'] = $model->industry;
+
+                // get subindustries under industry
+                $sub_industry = SubIndustry::find()
+                    ->where(['in','industry_id',$session['industry']])->all();
+
+                // convert sub industry result to a nice list
+                $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
+
+                // join with brands table to select relevant brands
+                $logs = OutdoorLogs::find()
+                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                    ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
+                        return $query->from('forgedb.'.Brand::tablename())
+                            ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
+                            ->where(['in','sub_industry_id',$sub_industry_list])
+                            ->all(); 
+                    }])
+                    ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->groupBy(['sub_industry.industry_id','brand_table.company_id'])
+                    ->orderBy('total desc');
+
+                // for chart
+                $chart_logs = OutdoorLogs::find()
+                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                    ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
+                        return $query->from('forgedb.'.Brand::tablename())
+                            ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
+                            ->where(['in','sub_industry_id',$sub_industry_list])
+                            ->all(); 
+                    }])
+                    ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->groupBy(['sub_industry.industry_id'])
+                    ->orderBy('total desc')
+                    ->all();
+
+                $dataProvider = new ActiveDataProvider([
+                    'query' => $logs,
+                    'pagination' => [
+                        'pageSize' => 10,
+                    ],
+                ]);
+
+                return $this->render('result-industry',[
+                    'dataProvider'=>$dataProvider,
+                    'chart_logs'=>$chart_logs
+                ]);
+            }
+        }elseif($session['start_date']){ //pull search params from session
+            // get subindustries under industry
+            $sub_industry = SubIndustry::find()
+                ->where(['in','industry_id',$session['industry']])->all();
+
+            // convert sub industry result to a nice list
+            $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
+
+            // join with brands table to select relevant brands
+            $logs = OutdoorLogs::find()
+                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
+                    return $query->from('forgedb.'.Brand::tablename())
+                        ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
+                        ->where(['in','sub_industry_id',$sub_industry_list])
+                        ->all(); 
+                }])
+                ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                ->groupBy(['sub_industry.industry_id','brand_table.company_id'])
+                ->orderBy('total desc');
+            
+            // for chart
+            $chart_logs = OutdoorLogs::find()
+                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
+                    return $query->from('forgedb.'.Brand::tablename())
+                        ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
+                        ->where(['in','sub_industry_id',$sub_industry_list])
+                        ->all(); 
+                }])
+                ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                ->groupBy(['sub_industry.industry_id'])
+                ->orderBy('total desc')
+                ->all();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $logs,
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+            ]);
+
+            return $this->render('result-industry',[
+                'dataProvider'=>$dataProvider,
+                'chart_logs'=>$chart_logs,
+            ]);
+        }else{
+            return $this->redirect('index');
+        }
+    }
 }

@@ -8,8 +8,10 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 $this->title = 'Total Spends | Report by Brand';
 $this->params['breadcrumbs'][] = $this->title;
+$session = \Yii::$app->session;
 ?>
 <div class="competitor-result container-fluid">
+	<h4><?= $this->title ?> - <?= date('F j, Y',strtotime($session['start_date'])).' to '.date('F j, Y',strtotime($session['end_date'])) ?> </h4>
 	<div class="row">
 		<div class="col-md-12 white-background">
 			<?php 
