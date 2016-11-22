@@ -8,7 +8,7 @@ use dosamigos\datepicker\DateRangePicker;
 /* @var $model app\models\CompetitorFilterForm */
 /* @var $form ActiveForm */
 
-$this->title = 'Total Spends | Industry';
+$this->title = 'Top Spenders | Industry';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="competitor-index container-fluid">

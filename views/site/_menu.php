@@ -16,18 +16,18 @@ use yii\bootstrap\Nav;
             'url' => ['/flight/index']
         ];
         $menuItems[] = [
-            'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spends</span>', 
+            'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spenders</span>', 
             'items'=>[
                 [
-                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Company</span>', 
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spenders By Company</span>', 
                     'url' => ['/spends/index']
                 ],
                 [
-                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Brand</span>', 
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spenders By Brand</span>', 
                     'url' => ['/spends/brand']
                 ],
                 [
-                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spends By Industry</span>', 
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Industry Ranking</span>', 
                     'url' => ['/spends/industry']
                 ]
             ]

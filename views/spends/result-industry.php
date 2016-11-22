@@ -6,7 +6,7 @@ use app\common\ExportMenu;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-$this->title = 'Total Spends | Report by Industry';
+$this->title = 'Top Spenders | Report by Industry';
 $this->params['breadcrumbs'][] = $this->title;
 $session = \Yii::$app->session;
 ?>

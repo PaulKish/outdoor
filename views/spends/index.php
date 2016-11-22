@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $model app\models\CompetitorFilterForm */
 /* @var $form ActiveForm */
 
-$this->title = 'Total Spends | Company';
+$this->title = 'Top Spenders | Company';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="competitor-index container-fluid">
