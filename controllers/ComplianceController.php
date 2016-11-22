@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\ComplianceFilterForm;
 use app\models\BbCompanies;
 use app\models\OutdoorLogs;
+use app\models\forge\Brand;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 
@@ -64,6 +65,11 @@ class ComplianceController extends \yii\web\Controller
 
                 $logs = OutdoorLogs::find()
                     //->joinWith(['bbSite','rawLog'])
+                    ->joinWith(['brand' => function($query) use ($profile) { 
+                        return $query->from('forgedb.'.Brand::tablename())
+                            ->where(['company_id'=>$profile->type_id]) 
+                            ->all(); 
+                    }])
                     ->where(['bb_co_id'=>$session['billboard_company']])
                     ->andWhere(
                         ['between',
@@ -91,6 +97,11 @@ class ComplianceController extends \yii\web\Controller
         }elseif($session['start_date']){ //pull search params from session
             $logs = OutdoorLogs::find()
                 //->joinWith(['bbSite','rawLog'])
+                ->joinWith(['brand' => function($query) use ($profile) { 
+                    return $query->from('forgedb.'.Brand::tablename())
+                        ->where(['company_id'=>$profile->type_id]) 
+                        ->all(); 
+                }])
                 ->where(['bb_co_id'=>$session['billboard_company']])
                 ->andWhere(
                     ['between',
