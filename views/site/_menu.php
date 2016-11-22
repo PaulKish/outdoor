@@ -32,6 +32,10 @@ use yii\bootstrap\Nav;
                 ]
             ]
         ];
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-calculator sub_icon"></i><span>Compliance Calculator</span>', 
+            'url' => ['/compliance/index']
+        ];
     }
 
     // show billboard owner menu
