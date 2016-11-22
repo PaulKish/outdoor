@@ -17,7 +17,6 @@ $session = \Yii::$app->session;
 			<?php 
 				$gridColumns = [
 				    ['class' => 'yii\grid\SerialColumn'],
-				    'brand.company.company_name',
 				    'brand.subIndustry.industry.industry_name',
 			        'total'
 				];
@@ -44,7 +43,7 @@ $session = \Yii::$app->session;
 
 				echo '<hr>'; 	
 
-				$data = ArrayHelper::map($chart_logs,'brand.subIndustry.industry.industry_name','total');
+				$data = ArrayHelper::map($dataProvider->getModels(),'brand.subIndustry.industry.industry_name','total');
 				$chart = [];
 				foreach($data as $key => $value){
 					$chart[] = ['name'=>$key,'y'=>(int)$value];
@@ -89,7 +88,6 @@ $session = \Yii::$app->session;
 				    'layout'=>"{items}\n{summary}\n{pager}",
 				    'columns' => [
 				        ['class' => 'yii\grid\SerialColumn'],
-				        'brand.company.company_name',
 				        'brand.subIndustry.industry.industry_name',
 				        [
 						    'attribute' => 'total',

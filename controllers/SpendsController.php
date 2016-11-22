@@ -285,22 +285,8 @@ class SpendsController extends \yii\web\Controller
                             ->all(); 
                     }])
                     ->where(['between','date_time',$session['start_date'],$session['end_date']])
-                    ->groupBy(['sub_industry.industry_id','brand_table.company_id'])
-                    ->orderBy('total desc');
-
-                // for chart
-                $chart_logs = OutdoorLogs::find()
-                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
-                    ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
-                        return $query->from('forgedb.'.Brand::tablename())
-                            ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
-                            ->where(['in','sub_industry_id',$sub_industry_list])
-                            ->all(); 
-                    }])
-                    ->where(['between','date_time',$session['start_date'],$session['end_date']])
                     ->groupBy(['sub_industry.industry_id'])
-                    ->orderBy('total desc')
-                    ->all();
+                    ->orderBy('total desc');
 
                 $dataProvider = new ActiveDataProvider([
                     'query' => $logs,
@@ -310,8 +296,7 @@ class SpendsController extends \yii\web\Controller
                 ]);
 
                 return $this->render('result-industry',[
-                    'dataProvider'=>$dataProvider,
-                    'chart_logs'=>$chart_logs
+                    'dataProvider'=>$dataProvider
                 ]);
             }
         }elseif($session['start_date']){ //pull search params from session
@@ -334,20 +319,6 @@ class SpendsController extends \yii\web\Controller
                 ->where(['between','date_time',$session['start_date'],$session['end_date']])
                 ->groupBy(['sub_industry.industry_id','brand_table.company_id'])
                 ->orderBy('total desc');
-            
-            // for chart
-            $chart_logs = OutdoorLogs::find()
-                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
-                ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
-                    return $query->from('forgedb.'.Brand::tablename())
-                        ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
-                        ->where(['in','sub_industry_id',$sub_industry_list])
-                        ->all(); 
-                }])
-                ->where(['between','date_time',$session['start_date'],$session['end_date']])
-                ->groupBy(['sub_industry.industry_id'])
-                ->orderBy('total desc')
-                ->all();
 
             $dataProvider = new ActiveDataProvider([
                 'query' => $logs,
@@ -357,8 +328,7 @@ class SpendsController extends \yii\web\Controller
             ]);
 
             return $this->render('result-industry',[
-                'dataProvider'=>$dataProvider,
-                'chart_logs'=>$chart_logs,
+                'dataProvider'=>$dataProvider
             ]);
         }else{
             return $this->redirect('index');
