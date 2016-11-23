@@ -24,7 +24,7 @@ class FlightFilterForm extends Model
     public function rules()
     {
         return [
-            [['brand', 'start_date', 'end_date','condition','type','region'], 'required'],
+            [['brand', 'start_date', 'end_date'], 'required'],
         ];
     }
 }
