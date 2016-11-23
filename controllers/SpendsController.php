@@ -74,9 +74,19 @@ class SpendsController extends \yii\web\Controller
                 $session['type'] = $model->type;
                 $session['region'] = $model->region;
 
+                // if industry is blank
+                $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+                $industries = ArrayHelper::getColumn($industry,'industry_id'); 
+
                 // get subindustries under industry
-                $sub_industry = SubIndustry::find()
+                if($model->industry == ''){
+                    $sub_industry = SubIndustry::find()
+                    ->where(['in','industry_id',$industries])->all();
+                }else{
+                    $sub_industry = SubIndustry::find()
                     ->where(['industry_id'=>$session['industry']])->all();
+                }
+                
 
                 // convert sub industry result to a nice list
                 $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
@@ -109,9 +119,18 @@ class SpendsController extends \yii\web\Controller
                 ]);
             }
         }elseif($session['start_date']){ //pull search params from session
+            // if industry is blank
+            $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+            $industries = ArrayHelper::getColumn($industry,'industry_id'); 
+
             // get subindustries under industry
-            $sub_industry = SubIndustry::find()
+            if($model->industry == ''){
+                $sub_industry = SubIndustry::find()
+                ->where(['in','industry_id',$industries])->all();
+            }else{
+                $sub_industry = SubIndustry::find()
                 ->where(['industry_id'=>$session['industry']])->all();
+            }
 
             // convert sub industry result to a nice list
             $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
@@ -191,9 +210,18 @@ class SpendsController extends \yii\web\Controller
                 $session['type'] = $model->type;
                 $session['region'] = $model->region;
 
+                // if industry is blank
+                $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+                $industries = ArrayHelper::getColumn($industry,'industry_id'); 
+
                 // get subindustries under industry
-                $sub_industry = SubIndustry::find()
+                if($model->industry == ''){
+                    $sub_industry = SubIndustry::find()
+                    ->where(['in','industry_id',$industries])->all();
+                }else{
+                    $sub_industry = SubIndustry::find()
                     ->where(['industry_id'=>$session['industry']])->all();
+                }
 
                 // convert sub industry result to a nice list
                 $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
@@ -226,9 +254,18 @@ class SpendsController extends \yii\web\Controller
                 ]);
             }
         }elseif($session['start_date']){ //pull search params from session
+            // if industry is blank
+            $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+            $industries = ArrayHelper::getColumn($industry,'industry_id'); 
+
             // get subindustries under industry
-            $sub_industry = SubIndustry::find()
+            if($model->industry == ''){
+                $sub_industry = SubIndustry::find()
+                ->where(['in','industry_id',$industries])->all();
+            }else{
+                $sub_industry = SubIndustry::find()
                 ->where(['industry_id'=>$session['industry']])->all();
+            }
 
             // convert sub industry result to a nice list
             $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');

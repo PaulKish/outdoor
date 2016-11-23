@@ -23,7 +23,7 @@ class CompetitorFilterForm extends Model
     public function rules()
     {
         return [
-            [['industry','start_date', 'end_date','region','type'], 'required'],
+            [['start_date', 'end_date'], 'required'],
         ];
     }
 }
