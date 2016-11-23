@@ -103,7 +103,7 @@ class FlightController extends \yii\web\Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $logs,
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 10,
             ],
         ]);
 
