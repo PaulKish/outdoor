@@ -7,6 +7,8 @@ use app\models\OutdoorLogs;
 use app\models\forge\IndustryReport;
 use app\models\forge\Brand;
 use app\models\forge\SubIndustry;
+use app\models\Counties;
+use app\models\BillboardType;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -40,31 +42,15 @@ class SpendsController extends \yii\web\Controller
 
         // get company industries
         $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $types = BillboardType::find()->all();
+        $regions = Counties::find()->all();
 
 
         return $this->render('index', [
             'model' => $model,
-            'industry'=>$industry
-        ]);
-    }
-
-    /**
-     *  By Brand
-     */
-    public function actionBrand()
-    {
-        $model = new CompetitorFilterForm();
-
-        // profile, get cuser type 
-        $profile = \Yii::$app->user->identity->profile;
-
-        // get company industries
-        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
-
-
-        return $this->render('brand', [
-            'model' => $model,
-            'industry'=>$industry
+            'industry'=>$industry,
+            'types'=>$types,
+            'regions'=>$regions
         ]);
     }
 
@@ -85,6 +71,8 @@ class SpendsController extends \yii\web\Controller
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
                 $session['industry'] = $model->industry;
+                $session['type'] = $model->type;
+                $session['region'] = $model->region;
 
                 // get subindustries under industry
                 $sub_industry = SubIndustry::find()
@@ -95,13 +83,17 @@ class SpendsController extends \yii\web\Controller
 
                 // join with brands table to select relevant brands
                 $logs = OutdoorLogs::find()
-                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                    ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                     ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                         return $query->from('forgedb.'.Brand::tablename())
                             ->where(['in','sub_industry_id',$sub_industry_list])
                             ->all(); 
-                    }])
+                    },'bbSite'])
                     ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->andWhere([
+                        'type'=>$session['type'],
+                        'region_id'=>$session['region']
+                    ])
                     ->groupBy(['company_id'])
                     ->orderBy('total desc');
 
@@ -126,13 +118,17 @@ class SpendsController extends \yii\web\Controller
 
             // join with brands table to select relevant brands
             $logs = OutdoorLogs::find()
-                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                 ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                     return $query->from('forgedb.'.Brand::tablename())
                         ->where(['in','sub_industry_id',$sub_industry_list])
                         ->all(); 
-                }])
+                },'bbSite'])
                 ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                ->andWhere([
+                    'type'=>$session['type'],
+                    'region_id'=>$session['region']
+                ])
                 ->groupBy(['company_id'])
                 ->orderBy('total desc');
 
@@ -152,6 +148,30 @@ class SpendsController extends \yii\web\Controller
     }
 
     /**
+     *  By Brand
+     */
+    public function actionBrand()
+    {
+        $model = new CompetitorFilterForm();
+
+        // profile, get cuser type 
+        $profile = \Yii::$app->user->identity->profile;
+
+        // get company industries
+        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $types = BillboardType::find()->all();
+        $regions = Counties::find()->all();
+
+        return $this->render('brand', [
+            'model' => $model,
+            'industry'=>$industry,
+            'types'=>$types,
+            'regions'=>$regions
+        ]);
+    }
+
+
+    /**
      *  Show grid of results
      */
     public function actionResultBrand(){
@@ -168,6 +188,8 @@ class SpendsController extends \yii\web\Controller
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
                 $session['industry'] = $model->industry;
+                $session['type'] = $model->type;
+                $session['region'] = $model->region;
 
                 // get subindustries under industry
                 $sub_industry = SubIndustry::find()
@@ -178,13 +200,17 @@ class SpendsController extends \yii\web\Controller
 
                 // join with brands table to select relevant brands
                 $logs = OutdoorLogs::find()
-                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                    ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                     ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                         return $query->from('forgedb.'.Brand::tablename())
                             ->where(['in','sub_industry_id',$sub_industry_list])
                             ->all(); 
-                    }])
+                    },'bbSite'])
                     ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->andWhere([
+                        'type'=>$session['type'],
+                        'region_id'=>$session['region']
+                    ])
                     ->groupBy(['brand_id'])
                     ->orderBy('total desc');
 
@@ -209,13 +235,17 @@ class SpendsController extends \yii\web\Controller
 
             // join with brands table to select relevant brands
             $logs = OutdoorLogs::find()
-                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                 ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                     return $query->from('forgedb.'.Brand::tablename())
                         ->where(['in','sub_industry_id',$sub_industry_list])
                         ->all(); 
-                }])
+                },'bbSite'])
                 ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                ->andWhere([
+                    'type'=>$session['type'],
+                    'region_id'=>$session['region']
+                ])
                 ->groupBy(['brand_id'])
                 ->orderBy('total desc');
 
@@ -240,9 +270,13 @@ class SpendsController extends \yii\web\Controller
     public function actionIndustry()
     {
         $model = new CompetitorFilterForm();
+        $types = BillboardType::find()->all();
+        $regions = Counties::find()->all();
 
         return $this->render('industry', [
-            'model' => $model
+            'model' => $model,
+            'types'=>$types,
+            'regions'=>$regions
         ]);
     }
 
@@ -267,6 +301,8 @@ class SpendsController extends \yii\web\Controller
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
                 $session['industry'] = $model->industry;
+                $session['type'] = $model->type;
+                $session['region'] = $model->region;
 
                 // get subindustries under industry
                 $sub_industry = SubIndustry::find()
@@ -277,14 +313,18 @@ class SpendsController extends \yii\web\Controller
 
                 // join with brands table to select relevant brands
                 $logs = OutdoorLogs::find()
-                    ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                    ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                     ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
                         return $query->from('forgedb.'.Brand::tablename())
                             ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
                             ->where(['in','sub_industry_id',$sub_industry_list])
                             ->all(); 
-                    }])
+                    },'bbSite'])
                     ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                    ->andWhere([
+                        'type'=>$session['type'],
+                        'region_id'=>$session['region']
+                    ])
                     ->groupBy(['sub_industry.industry_id'])
                     ->orderBy('total desc');
 
@@ -309,14 +349,18 @@ class SpendsController extends \yii\web\Controller
 
             // join with brands table to select relevant brands
             $logs = OutdoorLogs::find()
-                ->select(['outdoor_logs.brand_id,sum(rate) as total'])
+                ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
                 ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
                     return $query->from('forgedb.'.Brand::tablename())
                         ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
                         ->where(['in','sub_industry_id',$sub_industry_list])
                         ->all(); 
-                }])
+                },'bbSite'])
                 ->where(['between','date_time',$session['start_date'],$session['end_date']])
+                ->andWhere([
+                    'type'=>$session['type'],
+                    'region_id'=>$session['region']
+                ])
                 ->groupBy(['sub_industry.industry_id','brand_table.company_id'])
                 ->orderBy('total desc');
 

@@ -84,10 +84,10 @@ class FlightController extends \yii\web\Controller
                         ['between',
                             'outdoor_logs.date_time',$session['start_date'],$session['end_date'] 
                         ])
-                    ->andWhere([
+                     ->andWhere([
                         'type'=>$session['type'],
                         'condition'=> $session['condition'],
-                        'region'=>$session['region']
+                        'region_id'=>$session['region']
                     ])
                     ->orderBy('date_time asc');
 
@@ -114,7 +114,7 @@ class FlightController extends \yii\web\Controller
                 ->andWhere([
                     'type'=>$session['type'],
                     'condition'=> $session['condition'],
-                    'region'=>$session['region']
+                    'region_id'=>$session['region']
                 ])
                 ->orderBy('date_time asc');
 

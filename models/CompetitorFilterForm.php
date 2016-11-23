@@ -14,6 +14,8 @@ class CompetitorFilterForm extends Model
     public $industry;
     public $start_date;
     public $end_date;
+    public $region;
+    public $type;
 
     /**
      * @return array the validation rules.
@@ -21,7 +23,7 @@ class CompetitorFilterForm extends Model
     public function rules()
     {
         return [
-            [['industry','start_date', 'end_date'], 'required'],
+            [['industry','start_date', 'end_date','region','type'], 'required'],
         ];
     }
 }

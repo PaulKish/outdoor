@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        		<h5>Region</h5>
 				        <hr>
 				        <?= $form->field($model, 'region')->dropDownList(
-				        		ArrayHelper::map($regions, 'id', 'name'),
+				        		ArrayHelper::map($regions, 'code', 'name'),
 				        		['prompt'=>'--Please Select--']
 				        	) 
 				        ?>
