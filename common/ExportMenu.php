@@ -23,6 +23,8 @@ class ExportMenu extends ExportBase
      */
     public $exportFormView = '../../vendor/kartik-v/yii2-export/views/_form';
 
+    public $contentBefore;
+
     /**
      * Initializes PHP Excel Object Instance
      *

@@ -29,6 +29,7 @@ $session = \Yii::$app->session;
 				    'showConfirmAlert'=>false,
 				    'showColumnSelector'=>false,
 				    'filename'=>'competitor-export',
+				    'contentBefore'=>[['value'=>$this->title]],
 				    'dropdownOptions'=>[
 				    	'icon'=>'<i class="glyphicon glyphicon-export"></i>',
 				    	'label'=>'Export'
