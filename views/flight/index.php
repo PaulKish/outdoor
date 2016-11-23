@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'Proof of Flight';
 $this->params['breadcrumbs'][] = $this->title;
+$session = \Yii::$app->session;
 ?>
 <div class="flight-index container-fluid">
 	<div class="row">

@@ -7,8 +7,10 @@ use app\common\ExportMenu;
 /* @var $this yii\web\View */
 $this->title = 'Proof of Flight | Report';
 $this->params['breadcrumbs'][] = $this->title;
+$session = \Yii::$app->session;
 ?>
 <div class="flight-index container-fluid">
+	<h4><?= $this->title ?> - <?= date('F j, Y',strtotime($session['start_date'])).' to '.date('F j, Y',strtotime($session['end_date'])) ?> </h4>
 	<div class="row">
 		<div class="col-md-12 white-background">
 			<?php 
