@@ -23,7 +23,9 @@ class ExportMenu extends ExportBase
      */
     public $exportFormView = '../../vendor/kartik-v/yii2-export/views/_form';
 
-    public $contentBefore;
+    public $contentBefore = [];
+
+    public $contentAfter = [];
 
     /**
      * Initializes PHP Excel Object Instance
@@ -42,7 +44,7 @@ class ExportMenu extends ExportBase
         $manager = '';
         $company = 'Reelforge';
         $created = date("Y-m-d H:i:s");
-        $lastModifiedBy = 'krajee';
+        $lastModifiedBy = 'Reelforge';
         extract($this->docProperties);
         $this->_objPHPExcel->getProperties()
             ->setCreator($creator)

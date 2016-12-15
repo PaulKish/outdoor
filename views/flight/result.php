@@ -45,7 +45,8 @@ $session = \Yii::$app->session;
 				    'target'=> ExportMenu::TARGET_SELF,
 				    'showConfirmAlert'=>false,
 				    'showColumnSelector'=>false,
-				    'filename'=>'flight-export',
+				    //'contentBefore'=>['value'=>'test column'],
+				    //'filename'=>'flight-export',
 				    'dropdownOptions'=>[
 				    	'icon'=>'<i class="glyphicon glyphicon-export"></i>',
 				    	'label'=>'Export'
