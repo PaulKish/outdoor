@@ -44,6 +44,19 @@ use yii\bootstrap\Nav;
             'label' => '<i class="fa fa-lg fa-fw fa-list-alt sub_icon"></i><span>Reconciliation Log</span>', 
             'url' => ['/reconciliation/index']
         ];
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spenders</span>', 
+            'items'=>[
+                [
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spenders By Company</span>', 
+                    'url' => ['/bspends/index']
+                ],
+                [
+                    'label' => '<i class="fa fa-lg fa-caret-right sub_icon"></i><span>Top Spenders By Brand</span>', 
+                    'url' => ['/bspends/brand']
+                ],
+            ]
+        ];
     }
 
     $menuItems[] = [
