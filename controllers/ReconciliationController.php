@@ -55,68 +55,47 @@ class ReconciliationController extends \yii\web\Controller
     public function actionResult(){
 
         $model = new ReconciliationFilterForm();
-        
-        // profile
         $profile = \Yii::$app->user->identity->profile;
-
         $session = \Yii::$app->session;
 
         if ($model->load(\Yii::$app->request->post())) {
             if ($model->validate()) {
-                // store model params in session
+                // store model params in session so that pagination works
                 $session['start_date'] = $model->start_date;
                 $session['end_date'] = $model->end_date;
                 $session['condition'] = $model->condition;
                 $session['type'] = $model->type;
                 $session['region'] = $model->region;
-
-                $logs = OutdoorLogs::find()
-                    ->joinWith(['bbSite','rawLog'])
-                    ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
-                    ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
-                    ->andWhere([
-                        'type'=>$session['type'],
-                        'condition'=> $session['condition'],
-                        'region'=>$session['region']
-                    ])
-                    ->orderBy('date_time asc');
-
-                $dataProvider = new ActiveDataProvider([
-                    'query' => $logs,
-                    'pagination' => [
-                        'pageSize' => 10,
-                    ],
-                ]);
-
-                return $this->render('result',[
-                    'dataProvider'=>$dataProvider
-                ]);
+            }else{
+                return $this->redirect('index');
             }
-        }elseif($session['start_date']){
+        }
 
-            $logs = OutdoorLogs::find()
-                ->joinWith(['bbSite','rawLog'])
-                ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
-                ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
-                ->andWhere([
-                    'type'=>$session['type'],
-                    'condition'=> $session['condition'],
-                    'region'=>$session['region']
-                ])
-                ->orderBy('date_time asc');
-
-            $dataProvider = new ActiveDataProvider([
-                'query' => $logs,
-                'pagination' => [
-                    'pageSize' => 10,
-                ],
-            ]);
-
-            return $this->render('result',[
-                'dataProvider'=>$dataProvider
-            ]);
-        }else{
+        // if no session data redirect to index
+        if(!isset($session['start_date'])){
             return $this->redirect('index');
         }
+
+        $logs = OutdoorLogs::find()
+            ->joinWith(['bbSite','rawLog'])
+            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
+            ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
+            ->andWhere([
+                'type'=>$session['type'],
+                'condition'=> $session['condition'],
+                'region_id'=>$session['region']
+            ])
+            ->orderBy('date_time asc');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $logs,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('result',[
+            'dataProvider'=>$dataProvider
+        ]);
     }
 }

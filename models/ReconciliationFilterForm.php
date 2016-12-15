@@ -23,7 +23,8 @@ class ReconciliationFilterForm extends Model
     public function rules()
     {
         return [
-            [['start_date', 'end_date','condition','type','region'], 'required'],
+            [['start_date','end_date'], 'required'],
+            [['type','condition','region'],'safe']
         ];
     }
 }

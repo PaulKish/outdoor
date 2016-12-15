@@ -7,6 +7,7 @@ use app\common\ExportMenu;
 /* @var $this yii\web\View */
 $this->title = 'Reconciliation Log | Report';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
 ?>
 <div class="reconciliation-result container-fluid">
 	<div class="row">
