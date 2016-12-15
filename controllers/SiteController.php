@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\OutdoorLogs;
 use app\models\forge\Brand;
+use app\models\Counties;
+use app\models\DashFilterForm;
 use dosamigos\google\maps\LatLng;
 use dosamigos\google\maps\overlays\InfoWindow;
 use dosamigos\google\maps\overlays\Marker;
@@ -55,6 +57,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     { 
+        $regions = Counties::find()->all();
+        $model = new DashFilterForm();
+
         $this->layout = '@app/views/layouts/main';
         $center = new LatLng(['lat' =>-1.28333, 'lng' => 36.81667]);
         $map = new Map([
@@ -64,6 +69,11 @@ class SiteController extends Controller
             'height'=> 400 // pixels
         ]);
 
+        $region = 47; // hard code to Nairobi
+        if ($model->load(\Yii::$app->request->post())) {
+            $region = $model->region;
+        }
+
         // pull logs
         $profile = \Yii::$app->user->identity->profile;
         if($profile->user_type == 1){ // billboards for advertisers
@@ -72,15 +82,15 @@ class SiteController extends Controller
                 return $query->from('forgedb.'.Brand::tablename())
                     ->where(['company_id'=>$profile->type_id]) 
                     ->all(); 
-            }])
-            //->where('date_time >= now() - interval 1 month')
+            },'bbSite'])
+            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id,'region_id'=>$region])
             ->limit(20)
             ->distinct()
             ->all();
         }else{ // show billboards for company
             $logs = OutdoorLogs::find()
-            //->where('date_time >= now() - interval 1 month')
-            ->where(['bb_co_id'=>$profile->type_id])
+            ->joinWith(['bbSite'])
+            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id,'region_id'=>$region])
             ->distinct()
             ->limit(20)
             ->all();
@@ -109,7 +119,7 @@ class SiteController extends Controller
             $map->addOverlay($marker); 
         }
 
-        return $this->render('index',['map'=>$map]);
+        return $this->render('index',['map'=>$map,'model'=>$model,'regions'=>$regions]);
     }
 
     /**
