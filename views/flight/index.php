@@ -35,7 +35,7 @@ $session = \Yii::$app->session;
 				        <hr>
 				        <?= $form->field($model, 'region')->dropDownList(
 				        		ArrayHelper::map($regions, 'code', 'name'),
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All regions--']
 				        	) 
 				        ?>
 		        	</div>
@@ -44,7 +44,7 @@ $session = \Yii::$app->session;
 				        <hr>
 				        <?= $form->field($model, 'condition')->dropDownList(
 				        		ArrayHelper::map($conditions, 'id', 'condition'), 
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All conditions--']
 				        	) 
 				        ?>
 		        	</div>
@@ -53,7 +53,7 @@ $session = \Yii::$app->session;
 				        <hr>
 				        <?= $form->field($model, 'type')->dropDownList(
 				        		ArrayHelper::map($types, 'id', 'type'),
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All types--']
 				        	) 
 				        ?>
 		        	</div>
