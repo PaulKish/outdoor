@@ -10,6 +10,7 @@ use app\models\forge\Brand;
 use app\models\Counties;
 use app\models\DashFilterForm;
 use dosamigos\google\maps\LatLng;
+use dosamigos\google\maps\LatLngBounds;
 use dosamigos\google\maps\overlays\InfoWindow;
 use dosamigos\google\maps\overlays\Marker;
 use dosamigos\google\maps\Map;
@@ -61,6 +62,7 @@ class SiteController extends Controller
         $model = new DashFilterForm();
 
         $this->layout = '@app/views/layouts/main';
+
         $center = new LatLng(['lat' =>-1.28333, 'lng' => 36.81667]);
         $map = new Map([
             'center' => $center,
@@ -96,8 +98,10 @@ class SiteController extends Controller
             ->limit(20)
             ->all();
         }
-            
-
+        
+        // map bounds
+        $bounds = new LatLngBounds();
+        $markers = [];
         foreach($logs as $log){
             // Lets add a marker now
             $title = isset($log->brand->brand_name) ? $log->brand->brand_name: 'None';
@@ -117,8 +121,14 @@ class SiteController extends Controller
             );
 
             // Add marker to the map
-            $map->addOverlay($marker); 
+            $map->addOverlay($marker);
+            $markers[] = $marker; 
         }
+
+        $center_bounds = $bounds->getBoundsOfMarkers($markers);
+        $map->center = $center_bounds->getCenterCoordinates(); // center map accordingly
+        $map->zoom = $center_bounds->getZoom(400,10); // min width and zoom level
+
 
         return $this->render('index',['map'=>$map,'model'=>$model,'regions'=>$regions]);
     }
