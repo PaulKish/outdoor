@@ -25,6 +25,7 @@ class FlightFilterForm extends Model
     {
         return [
             [['brand', 'start_date', 'end_date'], 'required'],
+            [['type','condition','region'], 'safe']
         ];
     }
 }
