@@ -45,8 +45,6 @@ $session = \Yii::$app->session;
 				    'target'=> ExportMenu::TARGET_SELF,
 				    'showConfirmAlert'=>false,
 				    'showColumnSelector'=>false,
-				    //'contentBefore'=>['value'=>'test column'],
-				    //'filename'=>'flight-export',
 				    'dropdownOptions'=>[
 				    	'icon'=>'<i class="glyphicon glyphicon-export"></i>',
 				    	'label'=>'Export'
@@ -107,3 +105,6 @@ $session = \Yii::$app->session;
 		</div>
 	</div>
 </div>
+<?php 
+	$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
+?>
