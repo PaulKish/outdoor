@@ -83,14 +83,15 @@ class SiteController extends Controller
                     ->where(['company_id'=>$profile->type_id]) 
                     ->all(); 
             },'bbSite'])
-            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id,'region_id'=>$region])
+            ->filterWhere(['region_id'=>$region])
             ->limit(20)
             ->distinct()
             ->all();
         }else{ // show billboards for company
             $logs = OutdoorLogs::find()
             ->joinWith(['bbSite'])
-            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id,'region_id'=>$region])
+            ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
+            ->andFilterWhere(['region_id'=>$region])
             ->distinct()
             ->limit(20)
             ->all();
