@@ -108,3 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 	</div>
 </div>
+<?php 
+	$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
+?>

@@ -7,7 +7,6 @@ use app\common\ExportMenu;
 /* @var $this yii\web\View */
 $this->title = 'Reconciliation Log | Report';
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
 ?>
 <div class="reconciliation-result container-fluid">
 	<div class="row">
@@ -19,7 +18,8 @@ $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3Ibb
 			        'brand.brand_name',
 			        'bb_size',
 			        'date_time:datetime',
-			        'rate',
+			        'bbSite.rate',
+			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',
@@ -67,8 +67,8 @@ $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3Ibb
 				        'brand.brand_name',
 				        'bb_size',
 				        'date_time:datetime',
-				        'rate',
-				        'rawLog.comment',
+				        'bbSite.rate',
+				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',
 					        'label' => 'Photo',
@@ -103,3 +103,5 @@ $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3Ibb
 		</div>
 	</div>
 </div>
+<?php $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs'); 
+?>

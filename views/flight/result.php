@@ -21,7 +21,7 @@ $session = \Yii::$app->session;
 			        'bbCompany.company_name',
 			        'bb_size',
 			        'date_time:datetime',
-			        'rate',
+			        'bbSite.rate',
 			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
@@ -70,7 +70,7 @@ $session = \Yii::$app->session;
 				        'bbCompany.company_name',
 				        'bb_size',
 				        'date_time:datetime',
-				        'rate',
+				        'bbSite.rate',
 				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',

@@ -98,14 +98,19 @@ class SpendsController extends \yii\web\Controller
 
         // join with brands table to select relevant brands
         $logs = OutdoorLogs::find()
-            ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
+            ->select(['outdoor_logs.brand_id,sum(billboard_sites.rate) as total'])
             ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                 return $query->from('forgedb.'.Brand::tablename())
                     ->where(['in','sub_industry_id',$sub_industry_list])
                     ->all(); 
             },'bbSite'])
-            ->where(['between','date_time',$session['start_date'],$session['end_date']])
-            ->andWhere([
+            ->where(
+                ['between',
+                    'date(outdoor_logs.date_time)',
+                    $session['start_date'],
+                    $session['end_date']
+                ])
+            ->andFilterWhere([
                 'type'=>$session['type'],
                 'region_id'=>$session['region']
             ])
@@ -192,14 +197,19 @@ class SpendsController extends \yii\web\Controller
 
         // join with brands table to select relevant brands
         $logs = OutdoorLogs::find()
-            ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
+            ->select(['outdoor_logs.brand_id,sum(billboard_sites.rate) as total'])
             ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
                 return $query->from('forgedb.'.Brand::tablename())
                     ->where(['in','sub_industry_id',$sub_industry_list])
                     ->all(); 
             },'bbSite'])
-            ->where(['between','date_time',$session['start_date'],$session['end_date']])
-            ->andWhere([
+            ->where(
+                ['between',
+                    'date(outdoor_logs.date_time)',
+                    $session['start_date'],
+                    $session['end_date']
+                ])
+            ->andFilterWhere([
                 'type'=>$session['type'],
                 'region_id'=>$session['region']
             ])
@@ -270,15 +280,20 @@ class SpendsController extends \yii\web\Controller
 
         // join with brands table to select relevant brands
         $logs = OutdoorLogs::find()
-            ->select(['outdoor_logs.brand_id,sum(outdoor_logs.rate) as total'])
+            ->select(['outdoor_logs.brand_id,sum(billboard_sites.rate) as total'])
             ->joinWith(['brand' => function($query) use ($sub_industry_list) { 
                 return $query->from('forgedb.'.Brand::tablename())
                     ->innerJoin('forgedb.sub_industry', 'sub_industry.auto_id = brand_table.sub_industry_id')
                     ->where(['in','sub_industry_id',$sub_industry_list])
                     ->all(); 
             },'bbSite'])
-            ->where(['between','date_time',$session['start_date'],$session['end_date']])
-            ->andWhere([
+            ->where(
+                ['between',
+                    'date(outdoor_logs.date_time)',
+                    $session['start_date'],
+                    $session['end_date']
+                ])
+            ->andFilterWhere([
                 'type'=>$session['type'],
                 'region_id'=>$session['region']
             ])

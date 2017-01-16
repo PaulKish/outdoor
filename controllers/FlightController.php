@@ -91,9 +91,11 @@ class FlightController extends \yii\web\Controller
             ->where(['in','brand_id',$session['brand']])
             ->andWhere(
                 ['between',
-                    'outdoor_logs.date_time',$session['start_date'],$session['end_date'] 
+                    'date(outdoor_logs.date_time)',
+                    $session['start_date'],
+                    $session['end_date']
                 ])
-             ->andFilterWhere([
+            ->andFilterWhere([
                 'type'=>$session['type'],
                 'condition'=> $session['condition'],
                 'region_id'=>$session['region']

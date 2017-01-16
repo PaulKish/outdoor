@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		    	<div class="row">
 		        	<div class="col-sm-3">
-		        		<h5>County</h5>
+		        		<h5>Region</h5>
 				        <hr>
 				        <?= $form->field($model, 'region')->dropDownList(
 				        		ArrayHelper::map($regions, 'code', 'name'),
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All regions--']
 				        	) 
 				        ?>
 		        	</div>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				        <hr>
 				        <?= $form->field($model, 'condition')->dropDownList(
 				        		ArrayHelper::map($conditions, 'id', 'condition'), 
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All conditions--']
 				        	) 
 				        ?>
 		        	</div>
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				        <hr>
 				        <?= $form->field($model, 'type')->dropDownList(
 				        		ArrayHelper::map($types, 'id', 'type'),
-				        		['prompt'=>'--Please Select--']
+				        		['prompt'=>'--All types--']
 				        	) 
 				        ?>
 		        	</div>

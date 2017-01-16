@@ -79,8 +79,12 @@ class ReconciliationController extends \yii\web\Controller
         $logs = OutdoorLogs::find()
             ->joinWith(['bbSite','rawLog'])
             ->where(['outdoor_logs.bb_co_id'=>$profile->type_id])
-            ->andWhere(['between','outdoor_logs.date_time',$session['start_date'],$session['end_date']])
-            ->andWhere([
+            ->andWhere(['between',
+                'date(outdoor_logs.date_time)',
+                $session['start_date'],
+                $session['end_date']]
+                )
+            ->andFilterWhere([
                 'type'=>$session['type'],
                 'condition'=> $session['condition'],
                 'region_id'=>$session['region']

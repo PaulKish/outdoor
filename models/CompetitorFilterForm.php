@@ -24,6 +24,7 @@ class CompetitorFilterForm extends Model
     {
         return [
             [['start_date', 'end_date'], 'required'],
+            [['industry','region','type'],'safe']
         ];
     }
 }

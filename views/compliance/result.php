@@ -26,7 +26,8 @@ $session = \Yii::$app->session;
 			        'bbCompany.company_name',
 			        'bb_size',
 			        'date_time:datetime',
-			        'rate',
+			        'bbSite.rate',
+			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',
@@ -75,8 +76,8 @@ $session = \Yii::$app->session;
 				        'bbCompany.company_name',
 				        'bb_size',
 				        'date_time:datetime',
-				        'rate',
-				        'rawLog.comment',
+				        'bbSite.rate',
+				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',
 					        'label' => 'Photo',
@@ -111,3 +112,6 @@ $session = \Yii::$app->session;
 		</div>
 	</div>
 </div>
+<?php 
+	$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
+?>
