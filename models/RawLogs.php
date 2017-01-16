@@ -65,4 +65,12 @@ class RawLogs extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBbcondition()
+    {
+        return $this->hasOne(BillboardCondition::className(), ['id' => 'condition']);
+    }
 }

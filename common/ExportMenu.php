@@ -5,6 +5,7 @@ namespace app\common;
 use Yii;
 use \PHPExcel;
 use kartik\export\ExportMenu as ExportBase;
+use yii\helpers\ArrayHelper;
 
 /**
  * Modded to allow hyper links

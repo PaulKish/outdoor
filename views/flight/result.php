@@ -22,6 +22,7 @@ $session = \Yii::$app->session;
 			        'bb_size',
 			        'date_time:datetime',
 			        'rate',
+			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',
@@ -70,7 +71,7 @@ $session = \Yii::$app->session;
 				        'bb_size',
 				        'date_time:datetime',
 				        'rate',
-				        'rawLog.comment',
+				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',
 					        'label' => 'Photo',
