@@ -41,9 +41,13 @@ class SpendsController extends \yii\web\Controller
         $profile = \Yii::$app->user->identity->profile;
 
         // get company industries
-        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        //$industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $brands = Brand::find()->where(['company_id'=>$profile->type_id])->all(); // get brands then get sub industries from here
+
+        // get column data
+        $sub_industries = ArrayHelper::getColumn($brands,'sub_industry_id'); 
         $sub_industry = SubIndustry::find()
-            ->where(['in','industry_id',$industry])->all();
+            ->where(['in','auto_id',$sub_industries])->all();
         $types = BillboardType::find()->all();
         $regions = Counties::find()->all();
 
@@ -143,10 +147,14 @@ class SpendsController extends \yii\web\Controller
         // profile, get cuser type 
         $profile = \Yii::$app->user->identity->profile;
 
-        // get company industries
-        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        //$industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $brands = Brand::find()->where(['company_id'=>$profile->type_id])->all(); // get brands then get sub industries from here
+
+        // get column data
+        $sub_industries = ArrayHelper::getColumn($brands,'sub_industry_id'); 
         $sub_industry = SubIndustry::find()
-            ->where(['in','industry_id',$industry])->all();
+            ->where(['in','auto_id',$sub_industries])->all();
+            
         $types = BillboardType::find()->all();
         $regions = Counties::find()->all();
 
