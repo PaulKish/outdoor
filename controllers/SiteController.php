@@ -105,7 +105,7 @@ class SiteController extends Controller
         foreach($logs as $log){
             // Lets add a marker now
             $title = isset($log->brand->brand_name) ? $log->brand->brand_name: 'None';
-            $title .= ' | Billboard Company'; 
+            //$title .= ' | Billboard Company'; 
 
             $marker = new Marker([
                 'position' => new LatLng(['lat' => $log->lattitude, 'lng' => $log->longitude]),
