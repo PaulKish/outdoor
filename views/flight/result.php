@@ -34,7 +34,7 @@ $session = \Yii::$app->session;
 			            'format' => 'raw',
 				        'label' => 'Location',
 			            'value' => function ($data) {
-			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
+			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude,'img'=>$data->photo],true);
 			            }
 			        ],
 				];
@@ -94,7 +94,8 @@ $session = \Yii::$app->session;
 				                		'class'=>'location-modal',
 				                		'data'=>[
 				                			'latitude'=>$data->lattitude,
-				                			'longitude'=>$data->longitude
+				                			'longitude'=>$data->longitude,
+				                			'img'=>$data->photo
 				                		]
 				                	]
 				                );

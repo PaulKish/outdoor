@@ -32,16 +32,17 @@ $(document).ready(function() {
 	$(".location-modal").on('click',function(e){
 		var latitude = $(this).data("latitude");
 		var longitude = $(this).data("longitude");
+		var img = $(this).data("img");
 		$('#siteModal').find('.modal-content').html('<div class="map-div" id="map"></div>');
 		$('#siteModal').modal('show',{cache:false});
 		$('#siteModal').on('shown.bs.modal', function(e) {
-			initMap(latitude,longitude); // init google map
+			initMap(latitude,longitude,img); // init google map
 		});
 	});
 });
 
 // google map init
-function initMap(lat,long) {
+function initMap(lat,long,img) {
     var myLatLng = {lat:lat,lng:long};
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -49,11 +50,20 @@ function initMap(lat,long) {
       center: myLatLng
     });
 
+    var infowindow = new google.maps.InfoWindow({
+	    content: "<img width='100' src='http://reelapp.reelforge.com/rf_outdoor/uploads/"+img+"'></img>"
+	});
+
     var marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
       title: 'BillBoard Location'
     });
+
+    marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	});
+
 }
 
 // toggle checkbokes, used in brand selection
