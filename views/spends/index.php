@@ -17,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-12 white-background">
 		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
-		    	<h5>Industry</h5>
+		    	<h5>Sub Industry</h5>
 		    	<hr>
 		    	<?= $form->field($model, 'industry')->dropDownList(
-		        		ArrayHelper::map($industry, 'industry_id', 'industry.industry_name'),
+		        		ArrayHelper::map($industry, 'auto_id', 'sub_industry_name'),
 		        		['prompt'=>'--Please Select--']
 		        	) 
 		        ?>

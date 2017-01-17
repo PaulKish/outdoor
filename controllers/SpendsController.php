@@ -42,13 +42,15 @@ class SpendsController extends \yii\web\Controller
 
         // get company industries
         $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $sub_industry = SubIndustry::find()
+            ->where(['in','industry_id',$industry])->all();
         $types = BillboardType::find()->all();
         $regions = Counties::find()->all();
 
 
         return $this->render('index', [
             'model' => $model,
-            'industry'=>$industry,
+            'industry'=>$sub_industry,
             'types'=>$types,
             'regions'=>$regions
         ]);
@@ -80,6 +82,7 @@ class SpendsController extends \yii\web\Controller
             return $this->redirect('index');
         }
 
+        /*
         // if industry is blank
         $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
         $industries = ArrayHelper::getColumn($industry,'industry_id'); 
@@ -91,17 +94,18 @@ class SpendsController extends \yii\web\Controller
         }else{
             $sub_industry = SubIndustry::find()
             ->where(['industry_id'=>$session['industry']])->all();
-        }
+        }*/
         
         // convert sub industry result to a nice list
-        $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
+        //$sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
 
         // join with brands table to select relevant brands
         $logs = OutdoorLogs::find()
             ->select(['outdoor_logs.brand_id,sum(billboard_sites.rate) as total'])
-            ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
+            ->joinWith(['brand' => function($query) use ($session) { 
                 return $query->from('forgedb.'.Brand::tablename())
-                    ->where(['in','sub_industry_id',$sub_industry_list])
+                    //->where(['in','sub_industry_id',$sub_industry_list])
+                    ->filterWhere(['sub_industry_id'=>$session['industry']])
                     ->all(); 
             },'bbSite'])
             ->where(
@@ -141,12 +145,14 @@ class SpendsController extends \yii\web\Controller
 
         // get company industries
         $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
+        $sub_industry = SubIndustry::find()
+            ->where(['in','industry_id',$industry])->all();
         $types = BillboardType::find()->all();
         $regions = Counties::find()->all();
 
         return $this->render('brand', [
             'model' => $model,
-            'industry'=>$industry,
+            'industry'=>$sub_industry,
             'types'=>$types,
             'regions'=>$regions
         ]);
@@ -179,6 +185,7 @@ class SpendsController extends \yii\web\Controller
             return $this->redirect('index');
         }
 
+        /*
         // if industry is blank
         $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
         $industries = ArrayHelper::getColumn($industry,'industry_id'); 
@@ -195,12 +202,14 @@ class SpendsController extends \yii\web\Controller
         // convert sub industry result to a nice list
         $sub_industry_list = ArrayHelper::getColumn($sub_industry, 'auto_id');
 
+        */
         // join with brands table to select relevant brands
         $logs = OutdoorLogs::find()
             ->select(['outdoor_logs.brand_id,sum(billboard_sites.rate) as total'])
-            ->joinWith(['brand' => function($query) use ($sub_industry_list,$profile) { 
+            ->joinWith(['brand' => function($query) use ($session) { 
                 return $query->from('forgedb.'.Brand::tablename())
-                    ->where(['in','sub_industry_id',$sub_industry_list])
+                    //->where(['in','sub_industry_id',$sub_industry_list])
+                    ->filterWhere(['sub_industry_id'=>$session['industry']])
                     ->all(); 
             },'bbSite'])
             ->where(
