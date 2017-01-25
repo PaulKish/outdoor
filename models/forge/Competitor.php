@@ -18,7 +18,7 @@ class Competitor extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'competitor';
+        return 'competitor_assignment';
     }
 
     /**
