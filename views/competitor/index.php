@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        		<h5>Competition</h5>
 				        <hr>
 				        <?= $form->field($model, 'competition')->dropDownList(
-				        		ArrayHelper::map($competition, 'id', 'competition.company_name'),
+				        		ArrayHelper::map($competition, 'competitor_id', 'competition.company_name'),
 				        		['prompt'=>'--All competitors--']
 				        	) 
 				        ?>

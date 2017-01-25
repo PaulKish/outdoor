@@ -7,24 +7,26 @@ use app\common\ExportMenu;
 /* @var $this yii\web\View */
 $this->title = 'Competitor Analysis | Report';
 $this->params['breadcrumbs'][] = $this->title;
+$session = \Yii::$app->session;
 ?>
-<div class="competitor-result container-fluid">
+<div class="flight-index container-fluid">
+	<h4><?= $this->title ?> - <?= date('F j, Y',strtotime($session['start_date'])).' to '.date('F j, Y',strtotime($session['end_date'])) ?> </h4>
 	<div class="row">
 		<div class="col-md-12 white-background">
+			<?= $map->display(); ?>
+			<span><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png">: My Billboards <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png">: Competitor Billboards</span>
+			<hr>
 			<?php 
 				$gridColumns = [
 				    ['class' => 'yii\grid\SerialColumn'],
 				    'brand.company.company_name',
 			        'brand.brand_name',
-			        'brand.subIndustry.sub_industry_name',
 			        'bbCompany.company_name',
 			        'bb_size',
 			        'date_time:datetime',
 			        [
 				        'format' => 'raw',
 				        'label' => 'Photo',
-				        'headerOptions' => ['class' => 'text-center'],
-				        'contentOptions' => ['class' => 'text-center'],
 			            'value' => function ($data) {
 			                return Url::to(['site/photo','photo'=>$data->photo],true);
 			            }
@@ -32,10 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			        [
 			            'format' => 'raw',
 				        'label' => 'Location',
-				        'headerOptions' => ['class' => 'text-center'],
-				        'contentOptions' => ['class' => 'text-center'],
 			            'value' => function ($data) {
-			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude],true);
+			                return Url::to(['/site/map','lat'=>$data->lattitude,'long'=>$data->longitude,'img'=>$data->photo],true);
 			            }
 			        ],
 				];
@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				    'target'=> ExportMenu::TARGET_SELF,
 				    'showConfirmAlert'=>false,
 				    'showColumnSelector'=>false,
-				    'filename'=>'competitor-export',
 				    'dropdownOptions'=>[
 				    	'icon'=>'<i class="glyphicon glyphicon-export"></i>',
 				    	'label'=>'Export'
@@ -60,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				    ]
 				]);
 
-				echo '<hr>'; 	
+				echo '<hr>'; 
 
 				echo GridView::widget([
 				    'dataProvider' => $dataProvider,
@@ -69,7 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				        ['class' => 'yii\grid\SerialColumn'],
 				        'brand.company.company_name',
 				        'brand.brand_name',
-				        'brand.subIndustry.sub_industry_name',
 				        'bbCompany.company_name',
 				        'bb_size',
 				        'date_time:datetime',
@@ -95,7 +93,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				                		'class'=>'location-modal',
 				                		'data'=>[
 				                			'latitude'=>$data->lattitude,
-				                			'longitude'=>$data->longitude
+				                			'longitude'=>$data->longitude,
+				                			'img'=>$data->photo
 				                		]
 				                	]
 				                );
@@ -103,11 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				        ],
 				    ],
 				]);
-
 			?>
 		</div>
 	</div>
 </div>
-<?php 
-	$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCPA3IbbIblDCKLZ4obKt6wP4eaO3Qguzs');
-?>
