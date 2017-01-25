@@ -17,13 +17,38 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-12 white-background">
 		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
-		    	<h5>Industry</h5>
-		    	<hr>
-		    	<?= $form->field($model, 'industry')->dropDownList(
-		        		ArrayHelper::map($industry, 'industry_id', 'industry.industry_name'),
-		        		['prompt'=>'--Please Select--']
-		        	) 
-		        ?>
+		    	<div class="row">
+		    		<div class="col-sm-3">
+		        		<h5>Competition</h5>
+				        <hr>
+				        <?= $form->field($model, 'competition')->dropDownList(
+				        		ArrayHelper::map($competition, 'id', 'competition.company_name'),
+				        		['prompt'=>'--All competitors--']
+				        	) 
+				        ?>
+		        	</div>
+
+		        	<div class="col-sm-3">
+		        		<h5>Region</h5>
+				        <hr>
+				        <?= $form->field($model, 'region')->dropDownList(
+				        		ArrayHelper::map($regions, 'code', 'name'),
+				        		['prompt'=>'--All regions--']
+				        	) 
+				        ?>
+		        	</div>
+		      
+		        	<div class="col-sm-6">
+		        		<h5>Billboard Type</h5>
+				        <hr>
+				        <?= $form->field($model, 'type')->dropDownList(
+				        		ArrayHelper::map($types, 'id', 'type'),
+				        		['prompt'=>'--All types--']
+				        	) 
+				        ?>
+		        	</div>
+		        </div>
+		    	
 		        
 		        <hr>
 

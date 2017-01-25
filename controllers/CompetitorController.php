@@ -7,6 +7,10 @@ use app\models\OutdoorLogs;
 use app\models\forge\IndustryReport;
 use app\models\forge\Brand;
 use app\models\forge\SubIndustry;
+use app\models\forge\Competitor;
+use app\models\BillboardType;
+use app\models\BillboardSites;
+use app\models\Counties;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -30,21 +34,23 @@ class CompetitorController extends \yii\web\Controller
             ]
         ];
     }
-    /*
+    
+
     public function actionIndex()
     {
     	$model = new CompetitorFilterForm();
 
         // profile, get cuser type 
         $profile = \Yii::$app->user->identity->profile;
-
-        // get company industries
-        $industry = IndustryReport::find()->where(['company_id'=>$profile->type_id])->all();
-
+        $types = BillboardType::find()->all();
+        $regions = Counties::find()->all();
+        $competition = Competitor::find()->all();
 
         return $this->render('index', [
             'model' => $model,
-            'industry'=>$industry
+            'types' => $types,
+            'regions' => $regions,
+            'competition' => $competition
         ]);
     }
 

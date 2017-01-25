@@ -16,6 +16,10 @@ use yii\bootstrap\Nav;
             'url' => ['/flight/index']
         ];
         $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-line-chart sub_icon"></i><span>Competitor Analysis</span>', 
+            'url' => ['/competitor/index']
+        ];
+        $menuItems[] = [
             'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spenders</span>', 
             'items'=>[
                 [
