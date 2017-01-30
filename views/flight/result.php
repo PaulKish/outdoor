@@ -21,7 +21,6 @@ $session = \Yii::$app->session;
 			        'bbCompany.company_name',
 			        'bb_size',
 			        'date_time:datetime',
-			        //'bbSite.rate',
 			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
@@ -70,7 +69,6 @@ $session = \Yii::$app->session;
 				        'bbCompany.company_name',
 				        'bb_size',
 				        'date_time:datetime',
-				        //'bbSite.rate',
 				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',
@@ -78,9 +76,19 @@ $session = \Yii::$app->session;
 					        'headerOptions' => ['class' => 'text-center'],
 					        'contentOptions' => ['class' => 'text-center'],
 				            'value' => function ($data) {
-				                return Html::a('<i class="fa fa-lg fa-picture-o"></i>','#',
-				                	['class'=>'photo-modal','data'=>['photo'=>$data->photo]]
-				                );
+				            	$li = '';
+				            	$photos = explode(',',$data->photos);
+				            	foreach ($photos as $entries) {
+				            		$entry = explode('__',$entries);
+		                          	$li .= '<li>'.Html::a($entry[1],'#',['class'=>'photo-modal','data'=>['photo'=>$entry[0]]]).'</li>';
+		                        }
+                 				return '<div class="dropdown">
+		                          <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Photos
+		                          <span class="caret"></span></button>
+		                          <ul class="dropdown-menu">
+		                          	'.$li.'
+		                          </ul>
+                        		</div>';                                          
 				            }
 				        ],
 				        [

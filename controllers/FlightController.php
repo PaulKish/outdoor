@@ -87,6 +87,7 @@ class FlightController extends \yii\web\Controller
 
         // load logs
         $logs = OutdoorLogs::find()
+            ->select(['outdoor_logs.*',new \yii\db\Expression("GROUP_CONCAT(outdoor_logs.photo,'__',outdoor_logs.date_time ORDER BY outdoor_logs.date_time DESC) as photos")])
             ->joinWith(['bbSite','rawLog'])
             ->where(['in','brand_id',$session['brand']])
             ->andWhere(
@@ -100,7 +101,8 @@ class FlightController extends \yii\web\Controller
                 'condition'=> $session['condition'],
                 'region_id'=>$session['region']
             ])
-            ->orderBy('date_time asc');
+            ->groupBy('outdoor_logs.bb_site_id','outdoor_logs.brand_id')
+            ->orderBy('outdoor_logs.date_time asc');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $logs,

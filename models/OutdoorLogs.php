@@ -26,6 +26,7 @@ use app\models\forge\Brand;
 class OutdoorLogs extends \yii\db\ActiveRecord
 {
     public $total; // for sum totals
+    public $photos; // all photos for a specific billboard site and brand
     /**
      * @inheritdoc
      */
