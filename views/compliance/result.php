@@ -24,9 +24,9 @@ $session = \Yii::$app->session;
 				    'brand.company.company_name',
 			        'brand.brand_name',
 			        'bbCompany.company_name',
-			        'bb_size',
+			        //'bb_size',
 			        'date_time:datetime',
-			        'bbSite.rate',
+			        //'bbSite.rate',
 			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
@@ -74,9 +74,9 @@ $session = \Yii::$app->session;
 				        'brand.company.company_name',
 				        'brand.brand_name',
 				        'bbCompany.company_name',
-				        'bb_size',
+				        //'bb_size',
 				        'date_time:datetime',
-				        'bbSite.rate',
+				        //'bbSite.rate',
 				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',

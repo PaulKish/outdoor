@@ -16,9 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				    ['class' => 'yii\grid\SerialColumn'],
 				    'brand.company.company_name',
 			        'brand.brand_name',
-			        'bb_size',
+			        //'bb_size',
 			        'date_time:datetime',
-			        'bbSite.rate',
+			        //'bbSite.rate',
 			        'rawLog.bbcondition.condition',
 			        [
 				        'format' => 'raw',
@@ -65,9 +65,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				        ['class' => 'yii\grid\SerialColumn'],
 				        'brand.company.company_name',
 				        'brand.brand_name',
-				        'bb_size',
+				        //'bb_size',
 				        'date_time:datetime',
-				        'bbSite.rate',
+				        //'bbSite.rate',
 				        'rawLog.bbcondition.condition',
 				        [
 					        'format' => 'raw',

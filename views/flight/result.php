@@ -19,7 +19,7 @@ $session = \Yii::$app->session;
 				    'brand.company.company_name',
 			        'brand.brand_name',
 			        'bbCompany.company_name',
-			        'bb_size',
+			        //'bb_size',
 			        'date_time:datetime',
 			        'rawLog.bbcondition.condition',
 			        [
@@ -67,7 +67,7 @@ $session = \Yii::$app->session;
 				        'brand.company.company_name',
 				        'brand.brand_name',
 				        'bbCompany.company_name',
-				        'bb_size',
+				        //'bb_size',
 				        'date_time:datetime',
 				        'rawLog.bbcondition.condition',
 				        [
