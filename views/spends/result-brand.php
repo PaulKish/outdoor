@@ -44,7 +44,7 @@ $session = \Yii::$app->session;
 
 				echo '<hr>'; 	
 
-				$data = ArrayHelper::map($dataProvider->getModels(), 'brand.brand_name','total');
+				$data = ArrayHelper::map($logs->limit(20)->all(), 'brand.brand_name','total');
 				$chart = [];
 				foreach($data as $key => $value){
 					$chart[] = ['name'=>$key,'y'=>(int)$value];

@@ -133,7 +133,8 @@ class SpendsController extends \yii\web\Controller
         ]);
 
         return $this->render('result',[
-            'dataProvider'=>$dataProvider
+            'dataProvider'=>$dataProvider,
+            'logs'=>$logs
         ]);
     }
 
@@ -241,7 +242,8 @@ class SpendsController extends \yii\web\Controller
         ]);
 
         return $this->render('result-brand',[
-            'dataProvider'=>$dataProvider
+            'dataProvider'=>$dataProvider,
+            'logs'=>$logs
         ]);
     }
 
@@ -325,7 +327,8 @@ class SpendsController extends \yii\web\Controller
         ]);
 
         return $this->render('result-industry',[
-            'dataProvider'=>$dataProvider
+            'dataProvider'=>$dataProvider,
+            'logs'=>$logs
         ]);
     }
 }

@@ -135,7 +135,7 @@ class CompetitorController extends \yii\web\Controller
         // map bounds
         $bounds = new LatLngBounds();
         $markers = [];
-        foreach($dataProvider->getModels() as $log){
+        foreach($logs->all() as $log){
             // Lets add a marker now
             $title = $log->brand->company->company_name;
 
