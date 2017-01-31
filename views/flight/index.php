@@ -18,6 +18,21 @@ $session = \Yii::$app->session;
 		<div class="col-md-12 white-background">
 		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
+		    	<h5>Sub Industry</h5>
+		    	<hr>
+		    	<?= $form->field($model, 'sub_industry')->dropDownList(
+		        		ArrayHelper::map($sub_industry, 'auto_id', 'sub_industry_name'),
+		        		[
+		        			'prompt'=>'--Please Select--',
+			        		'onchange'=>'
+				                $.post( "'.Yii::$app->urlManager->createUrl('flight/brand-list?id=').'"+$(this).val(), function( data ) {
+				                  		$(".scrollbox").html(data);
+				                });'
+			            ]
+		        	) 
+		        ?>
+		        <hr>
+
 		    	<h5>Brand <small><a href="#" onClick="toggle_checkboxes(1,'FlightFilterForm[brand][]')">Check all brands</a> | <a href="#" onClick="toggle_checkboxes(0,'FlightFilterForm[brand][]')">Uncheck all brands</a></small></h5>
 		    	<hr>
 		    	<div class="scrollbox">

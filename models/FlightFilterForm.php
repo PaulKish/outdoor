@@ -17,6 +17,7 @@ class FlightFilterForm extends Model
     public $type;
     public $condition;
     public $region;
+    public $sub_industry;
 
     /**
      * @return array the validation rules.

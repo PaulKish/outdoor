@@ -9,8 +9,10 @@ use app\models\BillboardCondition;
 use app\models\Counties;
 use app\models\OutdoorLogs;
 use app\models\forge\Brand;
+use app\models\forge\SubIndustry;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 class FlightController extends \yii\web\Controller
 {
@@ -49,13 +51,40 @@ class FlightController extends \yii\web\Controller
         $conditions = BillboardCondition::find()->all();
         $regions = Counties::find()->all();
 
+        // get column data
+        $sub_industries = ArrayHelper::getColumn($brands,'sub_industry_id'); 
+        $sub_industry = SubIndustry::find()
+            ->where(['in','auto_id',$sub_industries])->all();
+
         return $this->render('index', [
             'model' => $model,
             'brands'=> $brands,
             'types' => $types,
             'conditions' => $conditions,
-            'regions' => $regions
+            'regions' => $regions,
+            'sub_industry' => $sub_industry
         ]);
+    }
+
+    /**
+     * List of brands
+     **/
+    public function actionBrandList($id){
+
+        $profile = \Yii::$app->user->identity->profile;
+        $brands = Brand::find()
+            ->where(['company_id'=>$profile->type_id,'sub_industry_id'=>$id])
+            ->all(); // get all brands under specific sub industry
+
+        $html = '';
+        foreach($brands as $list){
+            $html .='<div class="checkbox">
+                        <label>
+                        <input name="FlightFilterForm[brand][]" value="'.$list->brand_id.'" type="checkbox"> '.$list->brand_name.'
+                        </label>
+                    </div><br>';
+        }
+        return $html;
     }
 
     /**
