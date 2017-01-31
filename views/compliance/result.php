@@ -13,7 +13,7 @@ $session = \Yii::$app->session;
 	<h4><?= $this->title ?> - <?= date('F j, Y',strtotime($session['start_date'])).' to '.date('F j, Y',strtotime($session['end_date'])) ?> </h4>
 	<div class="row">
 		<div class="col-md-12 white-background">
-			<h4>Billboards Booked: <?= $session['count'] ?> Billboards Flighted: <?= $dataProvider->getCount() >= $session['count'] ? '<span class="text-success"">'.$dataProvider->getCount().'</span>': '<span class="text-danger">'.$dataProvider->getCount().'</span>'?></h4>
+			<h4>Billboards Booked: <?= $session['count'] ?> Billboards Flighted: <?= $dataProvider->getTotalCount() >= $session['count'] ? '<span class="text-success"">'.$dataProvider->getTotalCount().'</span>': '<span class="text-danger">'.$dataProvider->getTotalCount().'</span>'?></h4>
 		</div>
 	</div>
 	<div class="row">
