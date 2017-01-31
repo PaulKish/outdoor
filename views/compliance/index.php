@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    	<hr>
 		    	<?= $form->field($model, 'billboard_company')->dropDownList(
 		        		ArrayHelper::map($bbcompanies, 'co_id', 'company_name'),
-		        		['prompt'=>'--Please Select--']
+		        		['prompt'=>'--All billboard companies--']
 		        	) 
 		        ?>
 		        

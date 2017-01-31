@@ -22,7 +22,8 @@ class ComplianceFilterForm extends Model
     public function rules()
     {
         return [
-            [['count','start_date', 'end_date','billboard_company'], 'required'],
+            [['count','start_date', 'end_date'], 'required'],
+            [['billboard_company'],'safe']
         ];
     }
 }

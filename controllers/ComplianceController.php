@@ -76,7 +76,7 @@ class ComplianceController extends \yii\web\Controller
                     ->where(['company_id'=>$profile->type_id]) 
                     ->all(); 
             },'bbSite'])
-            ->where(['outdoor_logs.bb_co_id'=>$session['billboard_company']])
+            ->filterWhere(['outdoor_logs.bb_co_id'=>$session['billboard_company']])
             ->andWhere(
                 ['between',
                     'date(outdoor_logs.date_time)',
