@@ -12,14 +12,15 @@ use yii\bootstrap\Nav;
     // show advertiser menu
     if(Yii::$app->user->identity->profile->user_type == 1){
         $menuItems[] = [
-            'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
-            'url' => ['/flight/index']
-        ];
-        $menuItems[] = [
             'label' => '<i class="fa fa-lg fa-fw fa-line-chart sub_icon"></i><span>Competitor Analysis</span>', 
             'url' => ['/competitor/index']
         ];
         $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-plane sub_icon"></i><span>Proof of Flight</span>', 
+            'url' => ['/flight/index']
+        ];
+        
+        /*$menuItems[] = [
             'label' => '<i class="fa fa-lg fa-fw fa-money sub_icon"></i><span>Top Spenders</span>', 
             'items'=>[
                 [
@@ -35,7 +36,7 @@ use yii\bootstrap\Nav;
                     'url' => ['/spends/industry']
                 ]
             ]
-        ];
+        ];*/
         $menuItems[] = [
             'label' => '<i class="fa fa-lg fa-fw fa-calculator sub_icon"></i><span>Compliance Calculator</span>', 
             'url' => ['/compliance/index']

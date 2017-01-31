@@ -72,6 +72,7 @@ class SiteController extends Controller
         ]);
 
         $region = 47; // hard code to Nairobi
+        $model->region = $region;
         if ($model->load(\Yii::$app->request->post())) {
             $region = $model->region;
         }
