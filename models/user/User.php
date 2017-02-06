@@ -48,7 +48,7 @@ class User extends UserBaseModel
      */
     public function getProfile()
     {
-        return UserAssignment::findOne($this->id); 
+        return UserAssignment::find()->where(['user_id'=>$this->id]); 
     }
 
     /** @inheritdoc */
