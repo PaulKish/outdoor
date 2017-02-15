@@ -79,6 +79,13 @@ class SiteController extends Controller
 
         // pull logs
         $profile = \Yii::$app->user->identity->profile;
+
+        // means no assignment has taken place
+        if($profile == NULL){
+            $this->layout = '@app/views/layouts/login';
+            return $this->render('account');
+        }
+
         if($profile->user_type == 1){ // billboards for advertisers
             $logs = OutdoorLogs::find()
             ->joinWith(['brand' => function($query) use ($profile) { 
@@ -89,6 +96,12 @@ class SiteController extends Controller
             ->filterWhere(['region_id'=>$region])
             ->limit(20)
             ->distinct()
+            ->all();
+        }elseif($profile->user_type == 3){ // NCC account
+            $logs = OutdoorLogs::find()
+            ->joinWith(['bbSite','rawLog'])
+            ->filterWhere(['region_id'=>$region])
+            ->limit(20)
             ->all();
         }else{ // show billboards for company
             $logs = OutdoorLogs::find()
@@ -106,12 +119,16 @@ class SiteController extends Controller
         foreach($logs as $log){
             // Lets add a marker now
             $title = isset($log->brand->brand_name) ? $log->brand->brand_name: 'None';
-            //$title .= ' | Billboard Company'; 
 
             $marker = new Marker([
                 'position' => new LatLng(['lat' => $log->lattitude, 'lng' => $log->longitude]),
                 'title' => $title
             ]);
+
+            if($profile->user_type == 3){
+                if(isset($log->rawLog->condition) && $log->rawLog->condition == 1)
+                    $marker->icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+            }
 
             // Provide a shared InfoWindow to the marker
             $photo = Yii::$app->params['imageUrl'].$log->photo;

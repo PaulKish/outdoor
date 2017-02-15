@@ -30,7 +30,7 @@ AppAsset::register($this);
         <div class="profile-img">
             <?= Html::img('@web/img/placeholder.png',['width'=>'50px','class'=>'img-circle center-block']) ?>
             <h5 class="text-center text-uppercase"><?= Yii::$app->user->identity->username ?></h5>
-            <h5 class="text-center text-uppercase"><small><?= Yii::$app->user->identity->profile->company->company_name ?></small></h5>
+            <h5 class="text-center text-uppercase"><small><?= isset(Yii::$app->user->identity->profile->company->company_name) ? Yii::$app->user->identity->profile->company->company_name : '' ?></small></h5>
         </div>
         <?= $this->render('@app/views/site/_menu') ?>
     </div>

@@ -64,6 +64,14 @@ use yii\bootstrap\Nav;
         ];
     }
 
+    // show billboard owner menu
+    if(Yii::$app->user->identity->profile->user_type == 3){
+        $menuItems[] = [
+            'label' => '<i class="fa fa-lg fa-fw fa-list-alt sub_icon"></i><span>NCC Log</span>', 
+            'url' => ['/ncc/index']
+        ];
+    }
+
     $menuItems[] = [
         'label' => '<i class="fa fa-lg fa-fw fa-user sub_icon"></i><span>Account Settings</span>', 
         'url' => ['/user/settings/account']
