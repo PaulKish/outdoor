@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				    ['class' => 'yii\grid\SerialColumn'],
 				    //'brand.company.company_name',
 			        //'brand.brand_name',
+			        'bbCompany.company_name',
 			        'date_time:datetime',
 			        'rawLog.bbcondition.condition',
 			        [
@@ -63,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				        ['class' => 'yii\grid\SerialColumn'],
 				        //'brand.company.company_name',
 				        //'brand.brand_name',
+				        'bbCompany.company_name',
 				        'date_time:datetime',
 				        'rawLog.bbcondition.condition',
 				        [
