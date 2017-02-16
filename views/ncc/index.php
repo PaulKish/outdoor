@@ -18,16 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
 		    <?php $form = ActiveForm::begin(['layout'=>'inline','action'=>'result']); ?>
 
 		    	<div class="row">
-		        	<div class="col-sm-3">
-		        		<h5>Region</h5>
+		        	<div class="col-sm-6">
+		        		<h5>Billboard Companies</h5>
 				        <hr>
-				        <?= $form->field($model, 'region')->dropDownList(
-				        		ArrayHelper::map($regions, 'code', 'name'),
-				        		['prompt'=>'--All regions--']
+				        <?= $form->field($model, 'bbcompany')->dropDownList(
+				        		ArrayHelper::map($bbcompanies, 'co_id', 'company_name'),
+				        		['prompt'=>'--All billboard companies--']
 				        	) 
 				        ?>
 		        	</div>
-		        	<div class="col-sm-3">
+		        	<div class="col-sm-6">
 		        		<h5>Billboard Condition</h5>
 				        <hr>
 				        <?= $form->field($model, 'condition')->dropDownList(
@@ -36,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				        	) 
 				        ?>
 		        	</div>
-		        	<div class="col-sm-6">
+		        </div>
+
+		        <div class="row">   	
+		        	<div class="col-sm-12">
 		        		<h5>Billboard Type</h5>
 				        <hr>
 				        <?= $form->field($model, 'type')->dropDownList(
@@ -59,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					        ]
 					]) 
 				?>
-		    
 		    	<hr>
 		    	
 		        <div class="form-group">

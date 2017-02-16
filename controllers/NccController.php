@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ReconciliationFilterForm;
 use app\models\OutdoorLogs;
+use app\models\BbCompanies;
 use app\models\BillboardType;
 use app\models\BillboardSites;
 use app\models\BillboardCondition;
@@ -39,13 +40,15 @@ class NccController extends \yii\web\Controller
         $model = new ReconciliationFilterForm();
         $types = BillboardType::find()->all();
         $conditions = BillboardCondition::find()->all();
-        $regions = Counties::find()->all();
+        //$regions = Counties::find()->all();
+        $bbcompanies = BbCompanies::find()->all();
 
         return $this->render('index', [
             'model' => $model,
             'types' => $types,
             'conditions' => $conditions,
-            'regions' => $regions
+            //'regions' => $regions,
+            'bbcompanies'=>$bbcompanies
         ]);
     }
 
@@ -65,7 +68,7 @@ class NccController extends \yii\web\Controller
                 $session['end_date'] = $model->end_date;
                 $session['condition'] = $model->condition;
                 $session['type'] = $model->type;
-                $session['region'] = $model->region;
+                $session['bbcompany'] = $model->bbcompany;
             }else{
                 return $this->redirect('index');
             }
@@ -78,6 +81,7 @@ class NccController extends \yii\web\Controller
 
         $logs = OutdoorLogs::find()
             ->joinWith(['bbSite','rawLog'])
+            ->select(['outdoor_logs.*',new \yii\db\Expression("GROUP_CONCAT(outdoor_logs.photo,'__',outdoor_logs.date_time ORDER BY outdoor_logs.date_time DESC) as photos")])
             ->where(['between',
                 'date(outdoor_logs.date_time)',
                 $session['start_date'],
@@ -86,8 +90,9 @@ class NccController extends \yii\web\Controller
             ->andFilterWhere([
                 'type'=>$session['type'],
                 'condition'=> $session['condition'],
-                'region_id'=>$session['region']
+                'outdoor_logs.bb_co_id'=>$session['bbcompany']
             ])
+            ->groupBy('outdoor_logs.bb_site_id')
             ->orderBy('date_time asc');
 
         $dataProvider = new ActiveDataProvider([

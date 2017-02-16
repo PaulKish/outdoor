@@ -100,7 +100,7 @@ class SiteController extends Controller
         }elseif($profile->user_type == 3){ // NCC account
             $logs = OutdoorLogs::find()
             ->joinWith(['bbSite','rawLog'])
-            ->filterWhere(['region_id'=>$region])
+            ->filterWhere(['region_id'=>$region,'condition'=>4])
             ->limit(20)
             ->all();
         }else{ // show billboards for company
@@ -124,11 +124,6 @@ class SiteController extends Controller
                 'position' => new LatLng(['lat' => $log->lattitude, 'lng' => $log->longitude]),
                 'title' => $title
             ]);
-
-            if($profile->user_type == 3){
-                if(isset($log->rawLog->condition) && $log->rawLog->condition == 1)
-                    $marker->icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-            }
 
             // Provide a shared InfoWindow to the marker
             $photo = Yii::$app->params['imageUrl'].$log->photo;

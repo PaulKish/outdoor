@@ -16,6 +16,7 @@ class ReconciliationFilterForm extends Model
     public $type;
     public $condition;
     public $region;
+    public $bbcompany;
 
     /**
      * @return array the validation rules.
@@ -24,7 +25,7 @@ class ReconciliationFilterForm extends Model
     {
         return [
             [['start_date','end_date'], 'required'],
-            [['type','condition','region'],'safe']
+            [['type','condition','region','bbcompany'],'safe']
         ];
     }
 }
