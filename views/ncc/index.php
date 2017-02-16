@@ -44,7 +44,13 @@ $this->params['breadcrumbs'][] = $this->title;
 				        <hr>
 				        <?= $form->field($model, 'type')->dropDownList(
 				        		ArrayHelper::map($types, 'id', 'type'),
-				        		['prompt'=>'--All types--']
+				        		[
+				        			'prompt'=>'--All types--',
+				        			'options' => array_replace(
+				        					array_fill(1,13, ['disabled' => true]),
+				        					array(12 => ['disabled' => false])
+				        				)
+				        		]
 				        	) 
 				        ?>
 		        	</div>
