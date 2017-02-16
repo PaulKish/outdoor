@@ -38,10 +38,10 @@ class NccController extends \yii\web\Controller
     public function actionIndex()
     {
         $model = new ReconciliationFilterForm();
-        $types = BillboardType::find()->all();
-        $conditions = BillboardCondition::find()->all();
+        $types = BillboardType::find()->orderBy('type asc')->all();
+        $conditions = BillboardCondition::find()->orderBy('condition asc')->all();
         //$regions = Counties::find()->all();
-        $bbcompanies = BbCompanies::find()->all();
+        $bbcompanies = BbCompanies::find()->orderBy('company_name asc')->all();
 
         return $this->render('index', [
             'model' => $model,
@@ -92,7 +92,7 @@ class NccController extends \yii\web\Controller
                 'condition'=> $session['condition'],
                 'outdoor_logs.bb_co_id'=>$session['bbcompany']
             ])
-            ->groupBy('outdoor_logs.bb_site_id')
+            ->groupBy(new \yii\db\Expression("IFNULL(outdoor_logs.bb_site_id, outdoor_logs.id)"))
             ->orderBy('date_time asc');
 
         $dataProvider = new ActiveDataProvider([
